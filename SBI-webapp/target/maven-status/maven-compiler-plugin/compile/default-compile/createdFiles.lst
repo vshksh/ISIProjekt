@@ -1,0 +1,6 @@
+com\mycompany\KontrolerRejestracji.class
+com\mycompany\KontrolerLogowania.class
+com\mycompany\Security\SecurityConfiguration.class
+com\mycompany\Osoba.class
+com\mycompany\DataTransferObjects\KlientIndywidualnyDTO.class
+com\mycompany\DataTransferObjects\FormularzLogowaniaDTO.class

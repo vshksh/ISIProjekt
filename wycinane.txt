@@ -1,0 +1,89 @@
+        <dependency>
+            <groupId>unknown.binary</groupId>
+            <artifactId>hibernate-jpamodelgen-4.3.1.Final</artifactId>
+            <version>SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<bean id="entityManagerFactory"
+ class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="packagesToScan" value="com.mycompany" />
+    <property name="jpaVendorAdapter">
+        <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+            <property name="showSql" value="false" />
+            <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" />
+        </bean>
+    </property>
+    <property name="jpaProperties">
+        <props>
+            <prop key="hibernate.hbm2ddl.auto">update</prop>
+        </props>
+    </property>
+</bean>
+
+
+
+
+        <form:form method="POST" modelAttribute="formularzRej">   <!-- modelAttribute - klasa-->
+                      <table>
+
+         
+        <tr>
+              <th>Imiê</th>
+              <td><form:input type="text" path="imiona" /><form:errors path="imiona" /></td>
+	</tr>
+        
+        <tr>
+              <th>Nazwisko</th>
+              <td><form:input type="text" path="nazwisko" /><form:errors path="nazwisko" /></td>
+	</tr>
+        <tr>
+              <th>PESEL</th>
+              <td><form:input type="text" path="pesel" /><form:errors path="pesel" /></td>
+	</tr>
+        <tr>
+              <th>Adres email:</th>
+              <td><form:input type="text" path="adresEmail" /><form:errors path="adresEmail" /></td>
+	</tr>   
+        <tr>
+              <th>Data urodzenia:</th>
+              <td><form:input type="Date" path="dataUrodzenia" /><form:errors path="dataUrodzenia" /></td>
+	</tr>
+        <tr>
+              <th>Plec:</th>
+              <td><form:input type="text" path="plec" /><form:errors path="plec" /></td>
+	</tr>        
+        <tr>        
+        <tr>
+              <th>Adres korespondencji:</th>
+              <td><form:input type="text" path="adresKorespondencji" /><form:errors path="adresKorespondencji" /></td>
+	</tr>        
+        <tr>
+              <th>Kod pocztowy:</th>
+              <td><form:input type="text" path="kodPocztowy" /><form:errors path="kodPocztowy" /></td>
+	</tr>        
+        <tr>
+              <th>Telefon:</th>
+              <td><form:input type="text" path="telefon" /><form:errors path="telefon" /></td>
+	</tr>        
+
+              </table>
+        
+        
+        
+        
