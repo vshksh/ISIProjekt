@@ -6,9 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import javax.validation.constraints.*;
 
+/**
+ *  Ta klasa jest mapowaniem tabeli bazy danych na klasę javową.
+ *  Robi się je automatycznie poprzez prawy przycisk na pakiecie -> New -> Entity Classes from Database
+ */
 
 @Entity
 @Table(name="klienci_indywidualni")
@@ -52,10 +55,7 @@ public class KlientIndywidualnyDTO implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name = "kod_pocztowy")
     private String kodPocztowy;
-    
-    //@Autowired    
-    //private DataSource dataSource;
-    
+       
    
 
 

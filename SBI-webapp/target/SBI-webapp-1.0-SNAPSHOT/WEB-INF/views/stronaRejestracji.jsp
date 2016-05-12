@@ -13,9 +13,9 @@
         <h1>Prosimy się zarejestrować:</h1>
         <strong>${message}</strong>
         
-        <form:form method="POST" modelAttribute="formularzRej">   <!-- modelAttribute - klasa-->
-                      <table>
-
+        <form:form method="POST" modelAttribute="formularzRej">   <!-- modelAttribute - klasa, którą wysłał kontroler-->
+                                    <!-- Pola form:input odpowiadają polom tej klasy -->
+                <table>
          
         <tr>
               <th>Imię</th>
@@ -34,8 +34,7 @@
               <th>Adres email:</th>
               <td><form:input type="text" path="adresEmail" /><form:errors path="adresEmail" /></td>
 	</tr>   
-
-        <tr>        
+       
         <tr>
               <th>Adres korespondencji:</th>
               <td><form:input type="text" path="adresKorespondencji" /><form:errors path="adresKorespondencji" /></td>
