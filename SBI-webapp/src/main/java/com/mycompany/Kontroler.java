@@ -1,7 +1,7 @@
 package com.mycompany;
 
 
-import com.mycompany.DataTransferObjects.KlientIndywidualnyDTO;
+import com.mycompany.DataTransferObjects.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -75,14 +75,14 @@ public class Kontroler {
         }
         
     }
-    /*    @RequestMapping(value="/", method=RequestMethod.GET)
-    public String reqStronaGlownaGET() {
-        
-        nie działa
+       @RequestMapping(value="/", method=RequestMethod.GET) //NIE DZIALA
+    public ModelAndView reqStronaGlownaGET() {
+       
     
-        return "glowna";
+       return new ModelAndView("index");
         
-    }*/
+    }
+
 
             	@RequestMapping(value =  "/rachunki" , method = RequestMethod.GET)
 	public ModelAndView rachunkiPage() {
@@ -101,6 +101,8 @@ public class Kontroler {
                 String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
                 String saldo = jt.queryForObject("SELECT saldo FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
                 
+                
+                
                 //przekazywanie danych, które trzeba wyświetlić na stronie
 		modelAndView.addObject("title", "System Bankowosci Internetowej");
 		modelAndView.addObject("message", "Moje rachunki:");
@@ -113,13 +115,120 @@ public class Kontroler {
 	}
         
         
+            	@RequestMapping(value =  "/mojekarty" , method = RequestMethod.GET)
+	public ModelAndView mojeKartyPage() {
+                
+                String nrRachunku;
+                String numerKarty;
+                
+                //tworzenie modelu i widoku
+		ModelAndView modelAndView = new ModelAndView();              
+
+                //Pobieranie informacji o logowaniu               
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                //Pobieranie nazwy zalogowanego użytkownika (aby użyć jej w zapytaniu)
+                String currentPrincipalName = authentication.getName();
+                
+                
+                //Tutaj jest drugi sposób na realizowanie operacji na bazie danych: przez zwykłe zapytnaia SQLowe.
+                JdbcTemplate jt = new JdbcTemplate(dataSource);
+                
+                try
+                {
+                nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+                }catch (org.springframework.dao.EmptyResultDataAccessException e) {
+		nrRachunku = null;
+                }
+                try
+                {
+                numerKarty = jt.queryForObject("SELECT numer_karty FROM `karty` WHERE numer_rachunku = '" + nrRachunku + "'", String.class);
+                } catch (org.springframework.dao.EmptyResultDataAccessException e) {
+		numerKarty = null;
+                    }
+                //przekazywanie danych, które trzeba wyświetlić na stronie
+		modelAndView.addObject("title", "System Bankowosci Internetowej");
+		modelAndView.addObject("message", "Moje karty:");
+                modelAndView.addObject("nrRachunku", nrRachunku);
+                
+                if(numerKarty == null)
+                    modelAndView.addObject("informacjaOKarcie", "Nie masz jeszcze żadnej karty.");
+                else
+                    modelAndView.addObject("numerKarty",numerKarty);
+                //przekazywanie widoku (strony .jsp)
+		modelAndView.setViewName("mojekarty");
+		return modelAndView;
+
+	}
+        
+         @RequestMapping(value="/nowakarta", method=RequestMethod.GET)//Po podaniu "rejestracja" w URL
+    public ModelAndView reqNowaKartaGET() {
+        
+        return new ModelAndView("nowakarta", "karta", new KartaDTO());
+    }
+    
+     @RequestMapping(value = "/nowakarta", method=RequestMethod.POST)
+    public String reqNowaKartaPOST(@ModelAttribute("karta") @Valid KartaDTO karta, BindingResult result, Model model) {
+                 
+         if(result.hasErrors())
+        {
+            model.addAttribute("message", "Przepraszamy, coś poszło nie tak. Prosimy spróbować ponownie:");
+            return "mojekarty";
+        }
+        else
+         {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+
+
+            JdbcTemplate jt = new JdbcTemplate(dataSource);
+            String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+            jt.execute("CALL nowa_karta(" + nrRachunku + ", " + karta.getNazwa() + ", " + karta.getPIN() + ", @cvc, @nr)");
+
+            
+            return "redirect:/mojekarty";
+         }
+    }
+    
+         @RequestMapping(value="/przelew", method=RequestMethod.GET)//Po podaniu "rejestracja" w URL
+    public ModelAndView reqPrzelewGET() {
+        
+        return new ModelAndView("nowyprzelew", "przelew", new PrzelewDTO());
+    }
+    
+     @RequestMapping(value = "/przelew", method=RequestMethod.POST)
+    public String reqPrzelewPOST(@ModelAttribute("przelew") @Valid PrzelewDTO przelew, BindingResult result, Model model) {
+                 
+         if(result.hasErrors())
+        {
+            model.addAttribute("message", "Przepraszamy, coś poszło nie tak. Prosimy spróbować ponownie:");
+            return "zalogowano";
+        }
+        else
+         {
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+
+
+            JdbcTemplate jt = new JdbcTemplate(dataSource);
+            String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+            jt.execute("CALL nowy_przelew(" + nrRachunku + ", " + przelew.getRachunekDoc() + ", " + przelew.getKwota() + ",  '" + przelew.getWaluta() + "',  '" + przelew.getTytul() + "')");
+
+            
+            return "redirect:/zalogowano";
+         }
+    }
+        
+        
+        
+        
+        
     	@RequestMapping(value =  "/zalogowano" , method = RequestMethod.GET)
 	public ModelAndView zalogowanoPage() {
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.addObject("title", "System Bankowosci Internetowej");
 		modelAndView.addObject("message", "Witamy!");
-		modelAndView.setViewName("zalogowano"); //nazwa strony .jsp zwracanej po wywolaniu metody
+		modelAndView.setViewName("kontoIndywidualne"); //nazwa strony .jsp zwracanej po wywolaniu metody
 		return modelAndView;
 
 	}

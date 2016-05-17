@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -51,40 +50,29 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
 
-       <form:form method="POST" modelAttribute="formularzRej">   <!-- modelAttribute - klasa, którą wysłał kontroler-->
+       <form:form method="POST" modelAttribute="przelew">   <!-- modelAttribute - klasa, którą wysłał kontroler-->
                                     <!-- Pola form:input odpowiadają polom tej klasy -->
                 <table>
          
         <tr>
-              <th>Imię</th>
-              <td><form:input type="text" path="imiona" /><form:errors path="imiona" /></td>
+              <th>Podaj numer rachunku docelowego:</th>
+              <td><form:input type="text" path="rachunekDoc" /><form:errors path="rachunekDoc" /></td>
 	</tr>
         
         <tr>
-              <th>Nazwisko</th>
-              <td><form:input type="text" path="nazwisko" /><form:errors path="nazwisko" /></td>
+              <th>Podaj kwotę przelewu:</th>
+              <td><form:input type="number" path="kwota" /><form:errors path="kwota" /></td>
 	</tr>
+        
         <tr>
-              <th>PESEL</th>
-              <td><form:input type="text" path="pesel" /><form:errors path="pesel" /></td>
+              <th>Podaj walutę:</th>
+              <td><form:input type="text" path="waluta" /><form:errors path="waluta" /></td>
 	</tr>
+        
         <tr>
-              <th>Adres email:</th>
-              <td><form:input type="text" path="adresEmail" /><form:errors path="adresEmail" /></td>
-	</tr>   
-       
-        <tr>
-              <th>Adres korespondencji:</th>
-              <td><form:input type="text" path="adresKorespondencji" /><form:errors path="adresKorespondencji" /></td>
-	</tr>        
-        <tr>
-              <th>Kod pocztowy:</th>
-              <td><form:input type="text" path="kodPocztowy" /><form:errors path="kodPocztowy" /></td>
-	</tr>        
-        <tr>
-              <th>Telefon:</th>
-              <td><form:input type="text" path="telefon" /><form:errors path="telefon" /></td>
-	</tr>        
+              <th>Podaj tytuł:</th>
+              <td><form:input type="tytul" path="tytul" /><form:errors path="tytul" /></td>
+	</tr>
 
               </table>
         
@@ -94,7 +82,7 @@
         
           <div class="form-group"> 
                   <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" input type="submit" class="btn btn-default">Zarejestruj</button>
+                    <button type="submit" input type="submit" class="btn btn-default">Dodaj</button>
                   </div>
           </div>
 
