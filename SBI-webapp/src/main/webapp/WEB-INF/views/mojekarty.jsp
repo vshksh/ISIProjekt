@@ -51,57 +51,31 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
 
-       <form:form method="POST" modelAttribute="formularzRej">   <!-- modelAttribute - klasa, którą wysłał kontroler-->
-                                    <!-- Pola form:input odpowiadają polom tej klasy -->
-                <table>
-         
-        <tr>
-              <th>Imię</th>
-              <td><form:input type="text" path="imiona" /><form:errors path="imiona" /></td>
-	</tr>
-        
-        <tr>
-              <th>Nazwisko</th>
-              <td><form:input type="text" path="nazwisko" /><form:errors path="nazwisko" /></td>
-	</tr>
-        <tr>
-              <th>PESEL</th>
-              <td><form:input type="text" path="pesel" /><form:errors path="pesel" /></td>
-	</tr>
-        <tr>
-              <th>Adres email:</th>
-              <td><form:input type="text" path="adresEmail" /><form:errors path="adresEmail" /></td>
-	</tr>   
-       
-        <tr>
-              <th>Adres korespondencji:</th>
-              <td><form:input type="text" path="adresKorespondencji" /><form:errors path="adresKorespondencji" /></td>
-	</tr>        
-        <tr>
-              <th>Kod pocztowy:</th>
-              <td><form:input type="text" path="kodPocztowy" /><form:errors path="kodPocztowy" /></td>
-	</tr>        
-        <tr>
-              <th>Telefon:</th>
-              <td><form:input type="text" path="telefon" /><form:errors path="telefon" /></td>
-	</tr>        
+	<c:if test="${pageContext.request.userPrincipal.name != null}">
+		<h2>Jestes zalogowany jako : ${pageContext.request.userPrincipal.name} 
+                 | <a href="<c:url value="/logout" />" > Logout</a></h2>  
+	</c:if>
 
-              </table>
-        
-        
-        
-        
-        
-          <div class="form-group"> 
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" input type="submit" class="btn btn-default">Zarejestruj</button>
-                  </div>
-          </div>
+					<a href="<c:url value="/zalogowano" />">
+					Moje konto
+					</a>
+                                        <a href="<c:url value="/mojekarty" />">
+					Moje karty
+					</a>
+            <ul>
+				<li>
+                          
+					${informacjaOKarcie} ${numerKarty}
+				</li>
+                                
+                                <li>
+                                    <a href="<c:url value="/nowakarta" />">
+					Dodaj now? kart?
+                                    </a>					
+				</li>
 
-      
-              </form:form>
-              
-              
+            </ul>
+
               
           </div>
         </div>
