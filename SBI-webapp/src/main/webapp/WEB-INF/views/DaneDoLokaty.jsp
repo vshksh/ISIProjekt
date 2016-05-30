@@ -15,12 +15,12 @@
         <td><form:input type="number" path="kwota" /><form:errors path="kwota" /></td><br>
             Wybierz interesującą cię lokatę <br>
             lokata 1.5% na 6 miesięcy 
-            <input type="submit" name="action" value="6 miesiecy" /> <br>
+            <input type="submit" name="okres" value="6" /> <br>
             lokata 2% na 6 miesięcy 
-            <input type="submit" name="action" value="rok" /> <br>
+            <input type="submit" name="okres" value="12" /> <br>
             lokata 2.5% na 6 miesięcy 
-            <input type="submit" name="action" value="2 lata" /> <br>
-            <input type="submit" name="action" value="Strona glowna" />
+            <input type="submit" name="okres" value="24" /> <br>
+            <input type="submit" name="okres" value="Strona glowna" />
         </form:form>
         
     </body>

@@ -220,18 +220,47 @@ public class Kontroler {
          }
     }
         
-        
-        
-        
+    /**
+     * przechodzi na odpowiednia strone w zależności od typu zalogowanego użytkownika
+     */
         
     	@RequestMapping(value =  "/zalogowano" , method = RequestMethod.GET)
-	public ModelAndView zalogowanoPage() {
-
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("title", "System Bankowosci Internetowej");
-		modelAndView.addObject("message", "Witamy!");
-		modelAndView.setViewName("kontoIndywidualne"); //nazwa strony .jsp zwracanej po wywolaniu metody
-		return modelAndView;
+	public ModelAndView zalogowanoPage() 
+        {
+            ModelAndView modelAndView = new ModelAndView();
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+            JdbcTemplate jt = new JdbcTemplate(dataSource);           
+            String typ = jt.queryForObject("SELECT rola FROM `konta` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+            if (typ.equals("USER"))
+            {
+                modelAndView.addObject("title", "System Bankowosci Internetowej");
+                modelAndView.addObject("message", "Witamy!");
+                modelAndView.setViewName("kontoIndywidualne"); //nazwa strony .jsp zwracanej po wywolaniu metody
+            }
+            
+            else if (typ.equals("ADMIN"))
+            {
+                modelAndView.addObject("title", "System Bankowosci Internetowej");
+                modelAndView.addObject("message", "Witamy!");
+                modelAndView.setViewName("kontoAdmina"); //nazwa strony .jsp zwracanej po wywolaniu metody
+            }
+            
+            else if (typ.equals("BANK"))
+            {
+                modelAndView.addObject("title", "System Bankowosci Internetowej");
+                modelAndView.addObject("message", "Witamy!");
+                modelAndView.setViewName("kontoBankiera"); //nazwa strony .jsp zwracanej po wywolaniu metody
+            }
+            else 
+            {
+                modelAndView.addObject("title", "System Bankowosci Internetowej");
+                modelAndView.addObject("message", "Witamy!");
+                modelAndView.setViewName("NiepoprawnyTyp"); //nazwa strony .jsp zwracanej po wywolaniu metody
+            }
+            
+            
+            return modelAndView;
 
 	}
         
@@ -437,21 +466,21 @@ public class Kontroler {
       */
      
      @RequestMapping(value = "/lokaty", method=RequestMethod.POST)
-     public String reqzlokatyPOST(@RequestParam String action) 
+     public String reqzlokatyPOST(@RequestParam String okres) 
      {
-        if( action.equals("6 miesiecy") )
+        if( okres.equals("6") )
         {
             return "redirect:/6miesiecy"; 
         }
-        else if ( action.equals("rok") )
+        else if ( okres.equals("12") )
         {
            return "redirect:/rok"; 
         }
-        else if ( action.equals("2 lata") )
+        else if ( okres.equals("24") )
         {
            return "redirect:/2lata"; 
         }
-        else if ( action.equals("Strona glowna") )
+        else if ( okres.equals("Strona glowna") )
         {
             return "redirect:/"; 
         }
