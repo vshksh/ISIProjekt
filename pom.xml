@@ -77,7 +77,5 @@
         </plugins>
     </build>
 
-  <modules>
-    <module>SBI-webapp</module>
-  </modules>
+  <modules></modules>
 </project>

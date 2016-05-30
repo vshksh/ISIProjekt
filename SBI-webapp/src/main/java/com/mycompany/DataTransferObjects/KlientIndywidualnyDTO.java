@@ -1,12 +1,19 @@
 package com.mycompany.DataTransferObjects;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *  Ta klasa jest mapowaniem tabeli bazy danych na klasę javową.
@@ -16,6 +23,21 @@ import javax.validation.constraints.*;
 @Entity
 @Table(name="klienci_indywidualni")
 public class KlientIndywidualnyDTO implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "data_urodzenia")
+    @Temporal(TemporalType.DATE)
+    private Date dataUrodzenia;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 1)
+    @Column(name = "Plec")
+    private String plec;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesel")
+    private Collection<Konta> kontaCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesel")
+    private Collection<BazaKredytow> bazaKredytowCollection;
 
 
 
@@ -159,6 +181,40 @@ public class KlientIndywidualnyDTO implements Serializable {
     @Override
     public String toString() {
         return "com.mycompany.DataTransferObjects.FormularzRejestracjiDTO[ pesel=" + pesel + " ]";
+    }
+
+    public Date getDataUrodzenia() {
+        return dataUrodzenia;
+    }
+
+    public void setDataUrodzenia(Date dataUrodzenia) {
+        this.dataUrodzenia = dataUrodzenia;
+    }
+
+    public String getPlec() {
+        return plec;
+    }
+
+    public void setPlec(String plec) {
+        this.plec = plec;
+    }
+
+    @XmlTransient
+    public Collection<Konta> getKontaCollection() {
+        return kontaCollection;
+    }
+
+    public void setKontaCollection(Collection<Konta> kontaCollection) {
+        this.kontaCollection = kontaCollection;
+    }
+
+    @XmlTransient
+    public Collection<BazaKredytow> getBazaKredytowCollection() {
+        return bazaKredytowCollection;
+    }
+
+    public void setBazaKredytowCollection(Collection<BazaKredytow> bazaKredytowCollection) {
+        this.bazaKredytowCollection = bazaKredytowCollection;
     }
 
 

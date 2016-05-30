@@ -2,6 +2,10 @@ package com.mycompany;
 
 
 import com.mycompany.DataTransferObjects.KlientIndywidualnyDTO;
+import com.mycompany.DataTransferObjects.Konta;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,6 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -123,5 +128,172 @@ public class Kontroler {
 		return modelAndView;
 
 	}
+        
+        @RequestMapping(value="/kredyt", method=RequestMethod.GET)
+    public ModelAndView reqKredytGET() 
+    {       
+        return new ModelAndView("DaneDoKredytu", "formularzKr", new DaneKredyt());
+    }
     
+    @RequestMapping(value = "/kredyt", method=RequestMethod.POST)
+    public String reqKredytPOST(@RequestParam String action) 
+    {
+        if( action.equals("zmiana danych") )
+        {
+            return "redirect:/kredyt";
+        }
+        else if ( action.equals("Strona glowna") )
+        {
+            return "redirect:/"; 
+        }
+        else if ( action.equals("Sprawdz dostepny kredyt") )
+        {
+           return "forward:/oferta"; 
+        }
+        else
+        {
+            return "redirect:/blad"; // nie powinno to nigdy wyjsc i poki co prowadzi w puste miejsce, można potem wstawić jakąś stronę błędu
+        }       
+    }
+    
+    @RequestMapping(value = "/oferta", method=RequestMethod.POST)
+    public ModelAndView reqOfertaPOST(@RequestParam(value = "formazatrudnienia") String praca,
+            @RequestParam(value = "kwota") int kwota,
+            @RequestParam(value = "okres") int okres,
+            @RequestParam(value = "stancywilny") String stan,
+            @RequestParam(value = "wyksztalcenie") String wyksztalcenie,
+            @RequestParam(value = "statusmieszkaniowy") String statusmieszkaniowy,
+            @RequestParam(value = "ile_w_domu") int ile_w_domu,
+            @RequestParam(value = "lacznydochod") int lacznydochod)   
+        {
+            /**
+             * obliczanie zdolnosci kredytowej
+             */
+            double zdolnosc=1;
+            
+            
+            if (stan.equals("separacja"))
+            {
+                zdolnosc=zdolnosc*0.8;
+            }
+            else if (stan.equals("malzenstwo"))
+            {
+                zdolnosc=zdolnosc*1.2;
+            }
+            
+            if (praca.equals("emerytura")||praca.equals("renta"))
+            {
+                zdolnosc=zdolnosc*0.7;
+            }
+            else if (praca.equals("zlecenie")||praca.equals("wojsko"))
+            {
+                zdolnosc=zdolnosc*0.8;
+            }
+            else if (praca.equals("menager")||praca.equals("radny"))
+            {
+                zdolnosc=zdolnosc*1.1;
+            }
+            else if (praca.equals("prezes")||praca.equals("posel"))
+            {
+                zdolnosc=zdolnosc*1.3;
+            }
+            
+            if (wyksztalcenie.equals("podstawowe"))
+            {
+                zdolnosc=zdolnosc*0.7;
+            }
+            else if (wyksztalcenie.equals("srednie"))
+            {
+                zdolnosc=zdolnosc*0.8;
+            }
+            else if (wyksztalcenie.equals("dr"))
+            {
+                zdolnosc=zdolnosc*1.1;
+            }
+            
+            if (statusmieszkaniowy.equals("wlasne"))
+            {
+                zdolnosc=zdolnosc*1.2;
+            }
+            else if (statusmieszkaniowy.equals("sluzbowe"))
+            {
+                zdolnosc=zdolnosc*0.7;
+            }
+            else if (statusmieszkaniowy.equals("wynajem"))
+            {
+                zdolnosc=zdolnosc*0.9;
+            }
+            
+            if (ile_w_domu>2)
+            {
+                zdolnosc=zdolnosc*1.1;
+            }
+            else if (ile_w_domu==1)
+            {
+                zdolnosc=zdolnosc*0.8;
+            }
+            
+            /**
+             * kredyty na dom itp
+             */
+            if (okres>240)
+            {
+                if (lacznydochod*okres/2*zdolnosc<kwota) 
+                {
+                    zdolnosc=0; //odmowa kredytu
+                }
+            }
+            else if (lacznydochod*5*zdolnosc<kwota)
+            {
+                zdolnosc=0; //odmowa kredytu
+            }
+            // wartości do zmiany
+            double prowizja=5/zdolnosc; 
+            double oprocentowanie=7/zdolnosc; 
+            
+             return new ModelAndView("DaneDoOferty", "formularzOf", new DaneOferty (kwota,okres,zdolnosc, prowizja, oprocentowanie));
+        }
+    
+    @RequestMapping(value="/zmiana_stanu", method=RequestMethod.GET)
+    public ModelAndView reqzmiana_stanuGET() 
+    {       
+        return new ModelAndView("StronaStanuKonta", "formularzZmianyStanu", new ZmianaStanu());
+    }
+    
+    @RequestMapping(value = "/zmiana_stanu", method=RequestMethod.POST)
+    public String reqzmiana_stanuPOST(@RequestParam(value = "co_zmienic") String co_zmienic,
+            @RequestParam(value = "nowa_wartosc") String nowa_wartosc,
+            @RequestParam(value = "nazwa") String nazwa) 
+    {   
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU2");
+        EntityManager em;
+        em = emf.createEntityManager();
+        Konta konto=em.find(Konta.class, nazwa);
+        em.getTransaction().begin();
+        em.createQuery("update Konta set " +co_zmienic+"='"+nowa_wartosc+"' where nazwa_konta='"+nazwa+"' and rola='USER'").executeUpdate(); 
+        em.getTransaction().commit();
+        return "redirect:/";
+        
+    }
+    @RequestMapping(value="/zmiana_danych", method=RequestMethod.GET)
+    public ModelAndView reqzmiana_danychGET() 
+    {       
+        return new ModelAndView("StronaZmianyDanych", "formularzZmianyDanych", new ZmianaStanu());
+    }
+    
+    @RequestMapping(value = "/zmiana_danych", method=RequestMethod.POST)
+    public String reqzmiana_danychPOST(@RequestParam(value = "co_zmienic") String co_zmienic,
+            @RequestParam(value = "nowa_wartosc") String nowa_wartosc,
+            @RequestParam(value = "nazwa") String nazwa) 
+    {  
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU2");
+        EntityManager em;
+        em = emf.createEntityManager();
+        Konta konto=em.find(Konta.class, nazwa);
+        em.getTransaction().begin();
+        em.createQuery("update KlientIndywidualnyDTO set " +co_zmienic+"='"+nowa_wartosc+"' where pesel='"+nazwa+"'").executeUpdate();    
+        em.getTransaction().commit();
+        return "redirect:/";
+        
+    }
 }
