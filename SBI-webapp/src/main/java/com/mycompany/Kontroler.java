@@ -19,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 
 /**
  * 
@@ -401,5 +402,62 @@ public class Kontroler {
         return "redirect:/";
         
     }
-    
+    /**
+     * Jeśli jest zalogowany to przechodzi do strony wyboru lokat a jeśli nie to wraca na początek 
+     *  
+     */
+    @RequestMapping(value = "/lokaty", method=RequestMethod.GET)
+     public String reqzlokatyGET() 
+     {
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(auth instanceof AnonymousAuthenticationToken)) 
+        {
+            return "forward:/lokatyLog"; 
+        }
+        else
+        {
+            return "redirect:/";
+        }
+     }
+     
+     /**
+      * strona z wyborem lokat jeśli jest zalogowany
+      *  
+      */
+     @RequestMapping(value = "/lokatyLog", method=RequestMethod.GET)
+     public ModelAndView reqzlokatyLogGET() 
+     {
+         return new ModelAndView("DaneDoLokaty", "formularzLokaty", new DaneLokata());
+     }
+     
+     /**
+      * póki co redirectuje do nikąd po to tylko żeby sprawdzić czy dobrze działa if
+      * po stworzeniu panelu bankiera trzeba mu będzie przesyłać te dane aby zatwierdzał wnioski o lokatę
+      */
+     
+     @RequestMapping(value = "/lokaty", method=RequestMethod.POST)
+     public String reqzlokatyPOST(@RequestParam String action) 
+     {
+        if( action.equals("6 miesiecy") )
+        {
+            return "redirect:/6miesiecy"; 
+        }
+        else if ( action.equals("rok") )
+        {
+           return "redirect:/rok"; 
+        }
+        else if ( action.equals("2 lata") )
+        {
+           return "redirect:/2lata"; 
+        }
+        else if ( action.equals("Strona glowna") )
+        {
+            return "redirect:/"; 
+        }
+        else
+        {
+            return "redirect:/blad"; // nie powinno to nigdy wyjsc i poki co prowadzi w puste miejsce, można potem wstawić jakąś stronę błędu
+        } 
+     }
 }
