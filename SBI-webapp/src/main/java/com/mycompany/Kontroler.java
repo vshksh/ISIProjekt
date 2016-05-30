@@ -136,7 +136,7 @@ public class Kontroler {
                 try
                 {
                 nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
-                }catch (org.springframework.dao.EmptyResultDataAccessException e) {
+                }catch (org.springframework.dao.EmptyResultDataAccessException e) { 
 		nrRachunku = null;
                 }
                 try
@@ -195,6 +195,8 @@ public class Kontroler {
         return new ModelAndView("nowyprzelew", "przelew", new PrzelewDTO());
     }
     
+    
+    
      @RequestMapping(value = "/przelew", method=RequestMethod.POST)
     public String reqPrzelewPOST(@ModelAttribute("przelew") @Valid PrzelewDTO przelew, BindingResult result, Model model) {
                  
@@ -211,7 +213,7 @@ public class Kontroler {
 
             JdbcTemplate jt = new JdbcTemplate(dataSource);
             String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
-            jt.execute("CALL nowy_przelew(" + nrRachunku + ", " + przelew.getRachunekDoc() + ", " + przelew.getKwota() + ",  '" + przelew.getWaluta() + "',  '" + przelew.getTytul() + "')");
+            jt.execute("CALL nowy_przelew(" + nrRachunku + ", " + przelew.getRachunekDoc() + ", " + przelew.getKwota() + ",  '" + przelew.getWaluta() + "',  '" + przelew.getTytul() + "', @ou)");
 
             
             return "redirect:/zalogowano";
