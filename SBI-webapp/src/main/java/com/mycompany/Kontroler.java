@@ -222,6 +222,7 @@ public class Kontroler {
         
     /**
      * przechodzi na odpowiednia strone w zależności od typu zalogowanego użytkownika
+     * spytać się czy da się to otrzymać od razu z security bez sqla
      */
         
     	@RequestMapping(value =  "/zalogowano" , method = RequestMethod.GET)
