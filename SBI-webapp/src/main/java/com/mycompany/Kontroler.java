@@ -40,7 +40,7 @@ public class Kontroler {
          /* Metoda zwraca model (obiekt klasy KlientIndywidualnyDTO() jako formularzRej)
             oraz widok (stronę stronaRejestracji.jsp        
          */
-        return new ModelAndView("stronaRejestracji", "formularzRej", new KlientIndywidualnyDTO());
+        return new ModelAndView("stronaRejestracji", "formularzRej", new FormularzRejestracjiDTO());
     }
     /*
         Ta metoda jest wywoływana dla takiego samego URL, ale z żądaniem POST.
@@ -48,7 +48,7 @@ public class Kontroler {
         W niej realizowane jest to, co się dzieje po poprawnym lub niepoprawnym wypełnieniu formularza.
     */
      @RequestMapping(value = "/rejestracja", method=RequestMethod.POST)
-    public String reqRejestracjaPOST(@ModelAttribute("FormularzRejestracjiDTO") @Valid KlientIndywidualnyDTO formularzRej, BindingResult result, Model model) {
+    public String reqRejestracjaPOST(@ModelAttribute("formularzRej") @Valid FormularzRejestracjiDTO formularzRej, BindingResult result, Model model) {
                  
         if(result.hasErrors())
         {
@@ -58,20 +58,10 @@ public class Kontroler {
             
         else 
         {
-            /*  Jest to jeden sposób na realizowanie operacji na bazie danych.
-                Za pomocą EntityManagerFactory dokonuje się tu zapisywanie nowego użytkownika do bazy
-                Którego dane zostały wprowadzone za pomocą formularza rejestracji.
-                Obiekt formularzRej jest klasy KlientIndywidualnyDTO, który jest zmapowaniem tabeli z bazy.            
-                (jest trochę niefortunnie nazwany, pewnie to zmienię)
-            */
-            EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU2");
-            EntityManager em;
-            em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(formularzRej);
-            em.getTransaction().commit();
-            em.close();
-            return "redirect:/zarejestrowano";
+            JdbcTemplate jt = new JdbcTemplate(dataSource);
+            jt.execute("INSERT INTO konta (login, haslo) VALUES ('" +  formularzRej.getLogin() + "', '" + formularzRej.getHaslo() + "');");
+            jt.execute("INSERT INTO klienci_indywidualni (PESEL, imiona, nazwisko, telefon, adres_email, adres_korespondencji, kod_pocztowy, login_konta) VALUES ('" +  formularzRej.getPesel() + "', '" + formularzRej.getImiona() + "', '" + formularzRej.getNazwisko() + "', '" + formularzRej.getTelefon() + "', '" + formularzRej.getAdresEmail() + "', '" + formularzRej.getAdresKorespondencji() + "', '" + formularzRej.getKodPocztowy() + "', '" + formularzRej.getLogin() + "');");
+            return "redirect:/login";
         }
         
     }
@@ -219,9 +209,6 @@ public class Kontroler {
             return "redirect:/zalogowano";
          }
     }
-        
-        
-        
         
         
     	@RequestMapping(value =  "/zalogowano" , method = RequestMethod.GET)
