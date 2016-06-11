@@ -88,8 +88,8 @@ public class Kontroler {
                 
                 //Tutaj jest drugi sposób na realizowanie operacji na bazie danych: przez zwykłe zapytnaia SQLowe.
                 JdbcTemplate jt = new JdbcTemplate(dataSource);
-                String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
-                String saldo = jt.queryForObject("SELECT saldo FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+                String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
+                String saldo = jt.queryForObject("SELECT saldo FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
                 
                 
                 
@@ -125,7 +125,7 @@ public class Kontroler {
                 
                 try
                 {
-                nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+                nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
                 }catch (org.springframework.dao.EmptyResultDataAccessException e) { 
 		nrRachunku = null;
                 }
@@ -171,7 +171,7 @@ public class Kontroler {
 
 
             JdbcTemplate jt = new JdbcTemplate(dataSource);
-            String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+            String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
             jt.execute("CALL nowa_karta(" + nrRachunku + ", " + karta.getNazwa() + ", " + karta.getPIN() + ", @cvc, @nr)");
 
             
@@ -202,7 +202,7 @@ public class Kontroler {
 
 
             JdbcTemplate jt = new JdbcTemplate(dataSource);
-            String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+            String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
             jt.execute("CALL nowy_przelew(" + nrRachunku + ", " + przelew.getRachunekDoc() + ", " + przelew.getKwota() + ",  '" + przelew.getWaluta() + "',  '" + przelew.getTytul() + "', @ou)");
 
             
