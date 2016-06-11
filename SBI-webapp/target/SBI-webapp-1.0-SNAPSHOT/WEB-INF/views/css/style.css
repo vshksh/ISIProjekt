@@ -1,0 +1,80 @@
+﻿#rozsz {
+	float:left;
+	margin: 0;
+}
+
+#rozsz ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+#rozsz a {
+	text-decoration: none;
+	color : grey;
+}
+
+
+.panel {
+	border: 1px solid lightgrey;
+	width: 200px;
+	float: left;
+}
+
+
+.panel ul {
+	list-style-type: none; 
+	text-align: left; 
+	margin-top: 5px;
+	padding: 5px;
+}
+
+.panel ul li {
+	margin-bottom: 5px;
+}
+
+.panel ul li a{
+	color: grey;
+	text-decoration: none;
+}
+
+
+#content {
+	float: left;
+	margin: 20px;
+	margin-left: 100px;
+}
+
+
+#content form input {
+	display: inline;
+	margin-left: 50px;
+	margin: 5px;
+}
+
+textarea {
+	margin-left: 5px;
+    width: 175px;
+    height: 100px;
+	 resize: none;
+}
+
+#content form p {
+	margin: 0;
+}
+
+
+#leftCont {
+	float:left;
+	margin: 20px;
+}
+
+#leftCont form input {
+	display: inline;
+	margin-left: 50px;
+	margin: 5px;
+	width: 170px;
+}
+
+#leftCont form p {
+	margin: 0;
+}

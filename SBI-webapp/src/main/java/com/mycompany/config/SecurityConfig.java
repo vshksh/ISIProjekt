@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	  auth.jdbcAuthentication().dataSource(dataSource)
 		.usersByUsernameQuery(  //  Pobranie uzytkownika
-			"select nazwa_konta, haslo, 1 from konta where nazwa_konta=?")
+			"selectlogin, haslo, 1 from konta where nazwa_konta=?")
 		.authoritiesByUsernameQuery(    //  I jego roli (uprawnien)
-			"select nazwa_konta, rola from konta where nazwa_konta=?");
+			"select login, rola from konta where nazwa_konta=?");
 	}	
 	
         //  Konfiguracja
@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		  .formLogin().failureUrl("/login?error")
                   .defaultSuccessUrl("/zalogowano")
-		  .usernameParameter("nazwa_konta").passwordParameter("haslo")
+		  .usernameParameter("login").passwordParameter("haslo")
 		.and()
 		  .logout().logoutSuccessUrl("/login?logout")
 		.and()

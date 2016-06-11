@@ -1,6 +1,8 @@
 com\mycompany\config\SecurityConfig.class
+com\mycompany\DataTransferObjects\KartaDTO.class
+com\mycompany\DataTransferObjects\PrzelewDTO.class
 com\mycompany\Security\SpringSecurityInitializer.class
+com\mycompany\DataTransferObjects\FormularzRejestracjiDTO.class
 com\mycompany\Osoba.class
 com\mycompany\Kontroler.class
 com\mycompany\DataTransferObjects\KlientIndywidualnyDTO.class
-com\mycompany\DataTransferObjects\FormularzLogowaniaDTO.class
