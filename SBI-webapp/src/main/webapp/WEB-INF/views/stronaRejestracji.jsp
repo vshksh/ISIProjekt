@@ -54,10 +54,14 @@
        <form:form method="POST" modelAttribute="formularzRej">   <!-- modelAttribute - klasa, którą wysłał kontroler-->
                                     <!-- Pola form:input odpowiadają polom tej klasy -->
                 <table>
-         
         <tr>
-              <th>Imię</th>
-              <td><form:input type="text" path="imiona" /><form:errors path="imiona" /></td>
+              <th>Twój login</th>
+              <td><form:input type="text" path="login" /><form:errors path="login" /></td>
+	</tr>
+        
+        <tr>
+              <th>Hasło:</th>
+              <td><form:input type="text" path="haslo" /><form:errors path="haslo" /></td>
 	</tr>
         
         <tr>
