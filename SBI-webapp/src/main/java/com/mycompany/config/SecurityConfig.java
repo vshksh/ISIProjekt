@@ -40,9 +40,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 	  auth.jdbcAuthentication().dataSource(dataSource)
 		.usersByUsernameQuery(  //  Pobranie uzytkownika
-			"selectlogin, haslo, 1 from konta where nazwa_konta=?")
+			"select login, haslo, 1 from konta where login=?")
 		.authoritiesByUsernameQuery(    //  I jego roli (uprawnien)
-			"select login, rola from konta where nazwa_konta=?");
+			"select login, rola from konta where login=?");
 	}	
 	
         //  Konfiguracja
