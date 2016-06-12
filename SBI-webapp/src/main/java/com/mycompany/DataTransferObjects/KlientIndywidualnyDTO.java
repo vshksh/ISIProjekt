@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/origin/przemek
 package com.mycompany.DataTransferObjects;
 
 import java.io.Serializable;
@@ -38,15 +35,10 @@ public class KlientIndywidualnyDTO implements Serializable {
     @Size(min = 1, max = 1)
     @Column(name = "Plec")
     private String plec;
-<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesel")
     private Collection<Konta> kontaCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pesel")
     private Collection<BazaKredytow> bazaKredytowCollection;
-=======
-
->>>>>>> refs/remotes/origin/przemek
-
 
 
     @Id
@@ -207,7 +199,6 @@ public class KlientIndywidualnyDTO implements Serializable {
         this.plec = plec;
     }
 
-<<<<<<< HEAD
     @XmlTransient
     public Collection<Konta> getKontaCollection() {
         return kontaCollection;
@@ -225,15 +216,5 @@ public class KlientIndywidualnyDTO implements Serializable {
     public void setBazaKredytowCollection(Collection<BazaKredytow> bazaKredytowCollection) {
         this.bazaKredytowCollection = bazaKredytowCollection;
     }
-=======
->>>>>>> refs/remotes/origin/przemek
 
-
-    
-
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> refs/remotes/origin/przemek

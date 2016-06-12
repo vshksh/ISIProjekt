@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 
 package com.mycompany;
 
-=======
-package com.mycompany;
-
-
->>>>>>> refs/remotes/origin/przemek
 import com.mycompany.DataTransferObjects.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,12 +18,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
-=======
->>>>>>> refs/remotes/origin/przemek
-
 /**
  * 
  * Ta klasa realizuje w odpowiedzi na żądania HTTP (GET i POST) wysyła strony do odbiorcy
@@ -228,8 +218,7 @@ public class Kontroler {
             return "redirect:/zalogowano";
          }
     }
-        
-<<<<<<< HEAD
+
     /**
      * przechodzi na odpowiednia strone w zależności od typu zalogowanego użytkownika
      * spytać się czy da się to otrzymać od razu z security bez sqla
@@ -500,21 +489,4 @@ public class Kontroler {
             return "redirect:/blad"; // nie powinno to nigdy wyjsc i poki co prowadzi w puste miejsce, można potem wstawić jakąś stronę błędu
         } 
      }
-=======
-        
-        
-        
-        
-    	@RequestMapping(value =  "/zalogowano" , method = RequestMethod.GET)
-	public ModelAndView zalogowanoPage() {
-
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("title", "System Bankowosci Internetowej");
-		modelAndView.addObject("message", "Witamy!");
-		modelAndView.setViewName("kontoIndywidualne"); //nazwa strony .jsp zwracanej po wywolaniu metody
-		return modelAndView;
-
-	}
-    
->>>>>>> refs/remotes/origin/przemek
 }
