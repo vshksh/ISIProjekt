@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <title>Bankowość Internetowa</title>
+  <title>BankowoÅÄ Internetowa</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -25,9 +25,9 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="#">Klienci indywidualni</a></li>
-              <li><a href="#">Bankowość prywatna</a></li>
+              <li><a href="#">BankowoÅÄ prywatna</a></li>
               <li><a href="#">Biznes</a></li>
-              <li><a href="#">Przedsiębiorstwa</a></li>
+              <li><a href="#">PrzedsiÄbiorstwa</a></li>
               <li><a href="#">O banku</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -63,11 +63,24 @@
 					Moje karty
 					</a>
             <ul>
+                            ${brakRachunku}
 				<li>
-					Numer rachunku: ${nrRachunku}
+					Numer rachunku 1: ${nrRachunku1}
 				</li>
 				<li>
-					Saldo: ${saldo}
+					Saldo rachunku nr 1: ${saldo1}
+				</li>
+                                <li>
+					Numer rachunku 2: ${nrRachunku2}
+				</li>
+				<li>
+					Saldo rachunku nr 2: ${saldo2}
+				</li>
+                                <li>
+					Numer rachunku 3: ${nrRachunku3}
+				</li>
+				<li>
+					Saldo rachunku nr 3: ${saldo3}
 				</li>
                                 
 
