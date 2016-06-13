@@ -73,37 +73,6 @@ public class Kontroler {
         
     }
 
-
-            	@RequestMapping(value =  "/rachunki" , method = RequestMethod.GET)
-	public ModelAndView rachunkiPage() {
-
-                //tworzenie modelu i widoku
-		ModelAndView modelAndView = new ModelAndView();              
-
-                //Pobieranie informacji o logowaniu               
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                //Pobieranie nazwy zalogowanego użytkownika (aby użyć jej w zapytaniu)
-                String currentPrincipalName = authentication.getName();
-                
-                
-                //Tutaj jest drugi sposób na realizowanie operacji na bazie danych: przez zwykłe zapytnaia SQLowe.
-                JdbcTemplate jt = new JdbcTemplate(dataSource);
-                String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
-                String saldo = jt.queryForObject("SELECT saldo FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
-                
-                
-                
-                //przekazywanie danych, które trzeba wyświetlić na stronie
-		modelAndView.addObject("title", "System Bankowosci Internetowej");
-		modelAndView.addObject("message", "Moje rachunki:");
-                modelAndView.addObject("nrRachunku", nrRachunku);
-                modelAndView.addObject("saldo",saldo);
-                //przekazywanie widoku (strony .jsp)
-		modelAndView.setViewName("rachunki");
-		return modelAndView;
-
-	}
-        
         
             	@RequestMapping(value =  "/mojekarty" , method = RequestMethod.GET)
 	public ModelAndView mojeKartyPage() {
