@@ -21,9 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 
- * Ta klasa realizuje w odpowiedzi na żądania HTTP (GET i POST) wysyła strony do odbiorcy
- * W metodach mogą być realizowane różne operacje, które są potrzebne żeby odbiorcy wysłać potrzebne dane.
- * Używając tych samych adnotacji można zrobić więcej klas-kontrolerów.
+ * Ta klasa realizuje w odpowiedzi na ĹĽÄ…dania HTTP (GET i POST) wysyĹ‚a strony do odbiorcy
+ * W metodach mogÄ… byÄ‡ realizowane rĂłĹĽne operacje, ktĂłre sÄ… potrzebne ĹĽeby odbiorcy wysĹ‚aÄ‡ potrzebne dane.
+ * UĹĽywajÄ…c tych samych adnotacji moĹĽna zrobiÄ‡ wiÄ™cej klas-kontrolerĂłw.
  */
 @Controller
 public class Kontroler {
@@ -38,21 +38,21 @@ public class Kontroler {
     public ModelAndView reqRejestracjaGET() {
         
          /* Metoda zwraca model (obiekt klasy KlientIndywidualnyDTO() jako formularzRej)
-            oraz widok (stronę stronaRejestracji.jsp        
+            oraz widok (stronÄ™ stronaRejestracji.jsp        
          */
         return new ModelAndView("stronaRejestracji", "formularzRej", new FormularzRejestracjiDTO());
     }
     /*
-        Ta metoda jest wywoływana dla takiego samego URL, ale z żądaniem POST.
-        Użytkownik najpierw wywołuje stonę z GET, więc metoda z GET tworzy model, który jest przekazywany metodzie z POST
-        W niej realizowane jest to, co się dzieje po poprawnym lub niepoprawnym wypełnieniu formularza.
+        Ta metoda jest wywoĹ‚ywana dla takiego samego URL, ale z ĹĽÄ…daniem POST.
+        UĹĽytkownik najpierw wywoĹ‚uje stonÄ™ z GET, wiÄ™c metoda z GET tworzy model, ktĂłry jest przekazywany metodzie z POST
+        W niej realizowane jest to, co siÄ™ dzieje po poprawnym lub niepoprawnym wypeĹ‚nieniu formularza.
     */
      @RequestMapping(value = "/rejestracja", method=RequestMethod.POST)
     public String reqRejestracjaPOST(@ModelAttribute("formularzRej") @Valid FormularzRejestracjiDTO formularzRej, BindingResult result, Model model) {
                  
         if(result.hasErrors())
         {
-            model.addAttribute("message", "Przepraszamy, coś poszło nie tak. Prosimy spróbować ponownie:");
+            model.addAttribute("message", "Przepraszamy, coĹ› poszĹ‚o nie tak. Prosimy sprĂłbowaÄ‡ ponownie:");
             return "stronaRejestracji";
         }
             
@@ -85,11 +85,11 @@ public class Kontroler {
 
                 //Pobieranie informacji o logowaniu               
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                //Pobieranie nazwy zalogowanego użytkownika (aby użyć jej w zapytaniu)
+                //Pobieranie nazwy zalogowanego uĹĽytkownika (aby uĹĽyÄ‡ jej w zapytaniu)
                 String currentPrincipalName = authentication.getName();
                 
                 
-                //Tutaj jest drugi sposób na realizowanie operacji na bazie danych: przez zwykłe zapytnaia SQLowe.
+                //Tutaj jest drugi sposĂłb na realizowanie operacji na bazie danych: przez zwykĹ‚e zapytnaia SQLowe.
                 JdbcTemplate jt = new JdbcTemplate(dataSource);
                 
                 try
@@ -104,13 +104,13 @@ public class Kontroler {
                 } catch (org.springframework.dao.EmptyResultDataAccessException e) {
 		numerKarty = null;
                     }
-                //przekazywanie danych, które trzeba wyświetlić na stronie
+                //przekazywanie danych, ktĂłre trzeba wyĹ›wietliÄ‡ na stronie
 		modelAndView.addObject("title", "System Bankowosci Internetowej");
 		modelAndView.addObject("message", "Moje karty:");
                 modelAndView.addObject("nrRachunku", nrRachunku);
                 
                 if(numerKarty == null)
-                    modelAndView.addObject("informacjaOKarcie", "Nie masz jeszcze żadnej karty.");
+                    modelAndView.addObject("informacjaOKarcie", "Nie masz jeszcze ĹĽadnej karty.");
                 else
                     modelAndView.addObject("numerKarty",numerKarty);
                 //przekazywanie widoku (strony .jsp)
@@ -130,7 +130,7 @@ public class Kontroler {
                  
          if(result.hasErrors())
         {
-            model.addAttribute("message", "Przepraszamy, coś poszło nie tak. Prosimy spróbować ponownie:");
+            model.addAttribute("message", "Przepraszamy, coĹ› poszĹ‚o nie tak. Prosimy sprĂłbowaÄ‡ ponownie:");
             return "mojekarty";
         }
         else
@@ -161,7 +161,7 @@ public class Kontroler {
                  
          if(result.hasErrors())
         {
-            model.addAttribute("message", "Przepraszamy, coś poszło nie tak. Prosimy spróbować ponownie:");
+            model.addAttribute("message", "Przepraszamy, coĹ› poszĹ‚o nie tak. Prosimy sprĂłbowaÄ‡ ponownie:");
             return "zalogowano";
         }
         else
@@ -181,14 +181,42 @@ public class Kontroler {
         
         
     	@RequestMapping(value =  "/zalogowano" , method = RequestMethod.GET)
-	public ModelAndView zalogowanoPage() {
-
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.addObject("title", "System Bankowosci Internetowej");
-		modelAndView.addObject("message", "Witamy!");
-		modelAndView.setViewName("kontoIndywidualne"); //nazwa strony .jsp zwracanej po wywolaniu metody
-		return modelAndView;
-
-	}
+	public ModelAndView zalogowanoPage() 
+        {
+            ModelAndView modelAndView = new ModelAndView();
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            String currentPrincipalName = authentication.getName();
+            JdbcTemplate jt = new JdbcTemplate(dataSource);           
+            String typ = jt.queryForObject("SELECT rola FROM `konta` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+            if (typ.equals("USER"))
+            {
+                modelAndView.addObject("title", "System Bankowosci Internetowej");
+                modelAndView.addObject("message", "Witamy!");
+                modelAndView.setViewName("kontoIndywidualne"); //nazwa strony .jsp zwracanej po wywolaniu metody
+            }
+            
+            else if (typ.equals("ADMIN"))
+            {
+                modelAndView.addObject("title", "System Bankowosci Internetowej");
+                modelAndView.addObject("message", "Witamy!");
+                modelAndView.setViewName("kontoAdmina"); //nazwa strony .jsp zwracanej po wywolaniu metody
+            }
+            
+            else if (typ.equals("BANK"))
+            {
+                modelAndView.addObject("title", "System Bankowosci Internetowej");
+                modelAndView.addObject("message", "Witamy!");
+                modelAndView.setViewName("kontoBankiera"); //nazwa strony .jsp zwracanej po wywolaniu metody
+            }
+            else 
+            {
+                modelAndView.addObject("title", "System Bankowosci Internetowej");
+                modelAndView.addObject("message", "Witamy!");
+                modelAndView.setViewName("NiepoprawnyTyp"); //nazwa strony .jsp zwracanej po wywolaniu metody
+            }
+            
+            
+            return modelAndView;
+        }
     
 }

@@ -25,9 +25,9 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li><a href="#">Klienci indywidualni</a></li>
-              <li><a href="#">BankowoÅÄ prywatna</a></li>
+              <li><a href="#">Bankowość internetowa</a></li>
               <li><a href="#">Biznes</a></li>
-              <li><a href="#">PrzedsiÄbiorstwa</a></li>
+              <li><a href="#">Przedsiębiorstwa</a></li>
               <li><a href="#">O banku</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -49,39 +49,7 @@
           <div class="navbar-header">
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-
-
-	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<h2>Jestes zalogowany jako : ${pageContext.request.userPrincipal.name} 
-                 | <a href="<c:url value="/logout" />" > Logout</a></h2>  
-	</c:if>
-
-					<a href="<c:url value="/zalogowano" />">
-					Moje konto
-					</a>
-                                        <a href="<c:url value="/mojekarty" />">
-					Moje karty
-					</a>
-            <ul>
-                            ${brakRachunku}
-				<li>
-					Numer rachunku 1: ${nrRachunku1}
-				</li>
-				<li>
-					Saldo rachunku nr 1: ${saldo1}
-				</li>
-                                <li>
-					Numer rachunku 2: ${nrRachunku2}
-				</li>
-				<li>
-					Saldo rachunku nr 2: ${saldo2}
-				</li>
-                                <li>
-					Numer rachunku 3: ${nrRachunku3}
-				</li>
-				<li>
-					Saldo rachunku nr 3: ${saldo3}
-				</li>
+                            ${ileofert}
                                 
 
             </ul>
