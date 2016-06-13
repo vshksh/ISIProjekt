@@ -187,7 +187,7 @@ public class Kontroler {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             String currentPrincipalName = authentication.getName();
             JdbcTemplate jt = new JdbcTemplate(dataSource);           
-            String typ = jt.queryForObject("SELECT rola FROM `konta` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+            String typ = jt.queryForObject("SELECT rola FROM `konta` WHERE login = '" + currentPrincipalName + "'", String.class);
             if (typ.equals("USER"))
             {
                 modelAndView.addObject("title", "System Bankowosci Internetowej");
