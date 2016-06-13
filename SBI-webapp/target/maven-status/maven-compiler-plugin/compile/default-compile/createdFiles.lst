@@ -1,4 +1,5 @@
 com\mycompany\config\SecurityConfig.class
+<<<<<<< HEAD
 com\mycompany\DaneOferty.class
 com\mycompany\DataTransferObjects\BazaKredytow.class
 com\mycompany\DaneKredyt.class
@@ -9,3 +10,12 @@ com\mycompany\DataTransferObjects\Konta.class
 com\mycompany\Osoba.class
 com\mycompany\Kontroler.class
 com\mycompany\DataTransferObjects\FormularzLogowaniaDTO.class
+=======
+com\mycompany\DataTransferObjects\KartaDTO.class
+com\mycompany\DataTransferObjects\PrzelewDTO.class
+com\mycompany\Security\SpringSecurityInitializer.class
+com\mycompany\DataTransferObjects\FormularzRejestracjiDTO.class
+com\mycompany\Osoba.class
+com\mycompany\Kontroler.class
+com\mycompany\DataTransferObjects\KlientIndywidualnyDTO.class
+>>>>>>> refs/remotes/origin/czaja-1

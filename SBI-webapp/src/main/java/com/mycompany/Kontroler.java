@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 
 package com.mycompany;
 
+=======
+package com.mycompany;
+
+
+>>>>>>> refs/remotes/origin/czaja-1
 import com.mycompany.DataTransferObjects.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,8 +24,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+=======
+
+>>>>>>> refs/remotes/origin/czaja-1
 /**
  * 
  * Ta klasa realizuje w odpowiedzi na żądania HTTP (GET i POST) wysyła strony do odbiorcy
@@ -41,7 +51,11 @@ public class Kontroler {
          /* Metoda zwraca model (obiekt klasy KlientIndywidualnyDTO() jako formularzRej)
             oraz widok (stronę stronaRejestracji.jsp        
          */
+<<<<<<< HEAD
         return new ModelAndView("stronaRejestracji", "formularzRej", new KlientIndywidualnyDTO());
+=======
+        return new ModelAndView("stronaRejestracji", "formularzRej", new FormularzRejestracjiDTO());
+>>>>>>> refs/remotes/origin/czaja-1
     }
     /*
         Ta metoda jest wywoływana dla takiego samego URL, ale z żądaniem POST.
@@ -49,7 +63,11 @@ public class Kontroler {
         W niej realizowane jest to, co się dzieje po poprawnym lub niepoprawnym wypełnieniu formularza.
     */
      @RequestMapping(value = "/rejestracja", method=RequestMethod.POST)
+<<<<<<< HEAD
     public String reqRejestracjaPOST(@ModelAttribute("FormularzRejestracjiDTO") @Valid KlientIndywidualnyDTO formularzRej, BindingResult result, Model model) {
+=======
+    public String reqRejestracjaPOST(@ModelAttribute("formularzRej") @Valid FormularzRejestracjiDTO formularzRej, BindingResult result, Model model) {
+>>>>>>> refs/remotes/origin/czaja-1
                  
         if(result.hasErrors())
         {
@@ -59,6 +77,7 @@ public class Kontroler {
             
         else 
         {
+<<<<<<< HEAD
             /*  Jest to jeden sposób na realizowanie operacji na bazie danych.
                 Za pomocą EntityManagerFactory dokonuje się tu zapisywanie nowego użytkownika do bazy
                 Którego dane zostały wprowadzone za pomocą formularza rejestracji.
@@ -73,6 +92,12 @@ public class Kontroler {
             em.getTransaction().commit();
             em.close();
             return "redirect:/zarejestrowano";
+=======
+            JdbcTemplate jt = new JdbcTemplate(dataSource);
+            jt.execute("INSERT INTO konta (login, haslo) VALUES ('" +  formularzRej.getLogin() + "', '" + formularzRej.getHaslo() + "');");
+            jt.execute("INSERT INTO klienci_indywidualni (PESEL, imiona, nazwisko, telefon, adres_email, adres_korespondencji, kod_pocztowy, login_konta) VALUES ('" +  formularzRej.getPesel() + "', '" + formularzRej.getImiona() + "', '" + formularzRej.getNazwisko() + "', '" + formularzRej.getTelefon() + "', '" + formularzRej.getAdresEmail() + "', '" + formularzRej.getAdresKorespondencji() + "', '" + formularzRej.getKodPocztowy() + "', '" + formularzRej.getLogin() + "');");
+            return "redirect:/login";
+>>>>>>> refs/remotes/origin/czaja-1
         }
         
     }
@@ -84,6 +109,7 @@ public class Kontroler {
         
     }
 
+<<<<<<< HEAD
 
             	@RequestMapping(value =  "/rachunki" , method = RequestMethod.GET)
 	public ModelAndView rachunkiPage() {
@@ -115,6 +141,8 @@ public class Kontroler {
 
 	}
         
+=======
+>>>>>>> refs/remotes/origin/czaja-1
         
             	@RequestMapping(value =  "/mojekarty" , method = RequestMethod.GET)
 	public ModelAndView mojeKartyPage() {
@@ -136,8 +164,13 @@ public class Kontroler {
                 
                 try
                 {
+<<<<<<< HEAD
                 nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
                 }catch (org.springframework.dao.EmptyResultDataAccessException e) {
+=======
+                nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
+                }catch (org.springframework.dao.EmptyResultDataAccessException e) { 
+>>>>>>> refs/remotes/origin/czaja-1
 		nrRachunku = null;
                 }
                 try
@@ -182,7 +215,11 @@ public class Kontroler {
 
 
             JdbcTemplate jt = new JdbcTemplate(dataSource);
+<<<<<<< HEAD
             String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
+=======
+            String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
+>>>>>>> refs/remotes/origin/czaja-1
             jt.execute("CALL nowa_karta(" + nrRachunku + ", " + karta.getNazwa() + ", " + karta.getPIN() + ", @cvc, @nr)");
 
             
@@ -196,6 +233,11 @@ public class Kontroler {
         return new ModelAndView("nowyprzelew", "przelew", new PrzelewDTO());
     }
     
+<<<<<<< HEAD
+=======
+    
+    
+>>>>>>> refs/remotes/origin/czaja-1
      @RequestMapping(value = "/przelew", method=RequestMethod.POST)
     public String reqPrzelewPOST(@ModelAttribute("przelew") @Valid PrzelewDTO przelew, BindingResult result, Model model) {
                  
@@ -211,13 +253,19 @@ public class Kontroler {
 
 
             JdbcTemplate jt = new JdbcTemplate(dataSource);
+<<<<<<< HEAD
             String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE nazwa_konta = '" + currentPrincipalName + "'", String.class);
             jt.execute("CALL nowy_przelew(" + nrRachunku + ", " + przelew.getRachunekDoc() + ", " + przelew.getKwota() + ",  '" + przelew.getWaluta() + "',  '" + przelew.getTytul() + "')");
+=======
+            String nrRachunku = jt.queryForObject("SELECT numer_rachunku FROM `rachunki` WHERE login = '" + currentPrincipalName + "'", String.class);
+            jt.execute("CALL nowy_przelew(" + nrRachunku + ", " + przelew.getRachunekDoc() + ", " + przelew.getKwota() + ",  '" + przelew.getWaluta() + "',  '" + przelew.getTytul() + "', @ou)");
+>>>>>>> refs/remotes/origin/czaja-1
 
             
             return "redirect:/zalogowano";
          }
     }
+<<<<<<< HEAD
 
     /**
      * przechodzi na odpowiednia strone w zależności od typu zalogowanego użytkownika
@@ -489,4 +537,19 @@ public class Kontroler {
             return "redirect:/blad"; // nie powinno to nigdy wyjsc i poki co prowadzi w puste miejsce, można potem wstawić jakąś stronę błędu
         } 
      }
+=======
+        
+        
+    	@RequestMapping(value =  "/zalogowano" , method = RequestMethod.GET)
+	public ModelAndView zalogowanoPage() {
+
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("title", "System Bankowosci Internetowej");
+		modelAndView.addObject("message", "Witamy!");
+		modelAndView.setViewName("kontoIndywidualne"); //nazwa strony .jsp zwracanej po wywolaniu metody
+		return modelAndView;
+
+	}
+    
+>>>>>>> refs/remotes/origin/czaja-1
 }

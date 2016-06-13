@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>Bankowość Internetowa</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script>
+        function data() {
+            var wyswietl = document.getElementsByTagName("em");
+            var dzien = new Date();
+            
+            for (var i = 0; i < wyswietl.length; i++) {
+                wyswietl[i].innerHTML =
+                    dzien.getFullYear() + "." +
+                    (dzien.getMonth() + 1) + "." +
+                    dzien.getDate() + " ";
+            }
+        }
+    </script>
+    <style>
+        td {
+            color: limegreen;
+            
+        }
+    </style>
+</head>
+
+<body onload="data()">
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Bankowość Internetowa</a>
+                </div>
+                <div class="collapse navbar-collapse " id="myNavbar">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#">Twoje konto</a></li>
+                                <li><a href="#">Bezpieczeństwo</a></li>
+                                <li><a href="#">Oferty</a></li>
+                                <li class="dropdown">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">O banku<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="#">Wsparcie</a></li>
+                                        <li><a href="#">Kontakt</a></li>
+                                        <li><a href="#">Oddziały</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-3">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#"><span class="glyphicon glyphicon-user"></span> Zarejestruj</a>
+                                </li>
+                                <li>
+                                    <a href="#" data-toggle="collapse" data-target="#demo"><span class="glyphicon glyphicon-log-in"></span> Zaloguj</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="demo" class="collapse collapse-well">
+                        <div class="well demo">
+                            <form class="navbar-form form-inline" role="form">
+                                <div class="form-group">
+                                    <label for="login">Numer klienta lub login:</label>
+                                    <input type="text" class="form-control" id="login">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Hasło:</label>
+                                    <input type="password" class="form-control" id="pwd">
+                                </div>
+                                <button class="btn btn-primary" type="submit">Zaloguj</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="content">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1>Aktualności</h1>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <em></em>
+                            <h3>Pierwsze kroki</h3>
+                            <p class="well well-sm"><big>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Witamy na naszym serwisie poświęconym bankowości internetowej w której będziesz mógł zarządzać swoimi finansami oraz mieć stałą kontrole nad swoimi rachunkami. <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zapewnimy Wam najwyższej jakości usługi oraz bezpieczeństwo i niezawodność. <br /><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-info">Nasz serwis jest w fazie rozwoju, za utrudnienia wynikające z ciągłej rozbudowy strony serdecznie przepraszamy.</span></big></p>
+                        </div>
+                        <div class="col-sm-6">
+                            <em></em>
+                            <h3>Dlaczego akurat My ?</h3>
+                            <div class="well well-sm">
+                                <p>Oferujemy Państwu możliwość :</p>
+                                <ul>
+                                    <li>stworzenia własnego konta bankowości internetowej</li>
+                                    <li>możliwość zarządzania swoimi finansami</li>
+                                    <li>wykonywanie przelewów: krajowych, zagranicznych, natychmiastowych</li>
+                                    <li>realizacja tworzenia wielu rachunków</li>
+                                    <li>pobieranie kredytów</li>
+                                    <li>tworzenie tranzakcji stałych</li>
+                                    <li>usługi dla klientów indywidualnych jak i przedsiębiorstw</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <h1>Notowania</h1>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="table table-hover ">
+                            <thead>
+                                <tr>
+                                    <th>Kursy walut <em></em></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <th>Waluta</th>
+                                    <th>Kupno</th>
+                                    <th>Sprzedaż</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-primary">CHF</td>
+                                    <td>3.8867</td>
+                                    <td>4.1106</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-primary">USD</td>
+                                    <td>3.8670</td>
+                                    <td>4.0654</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-primary">GBP</td>
+                                    <td>5.6504</td>
+                                    <td>5.9401</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-primary">EUR</td>
+                                    <td>4.3110</td>
+                                    <td>4.5320</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Szybki dostęp</h3>
+                    <hr />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>Podanie o przyznanie numeru rachunku</h3>
+                    <p>Wypełnianie wniosku zajmuje tylko chwile i zostaje odrazu obsłużonne przez naszych bankierów.</p>
+                    <a class="btn btn-primary" href="#">Wiecej</a>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Aktualizacja danych klienta</h3>
+                    <p>Chcesz zmienić ustawienia swojego konta? Tutaj klienci mogą otrzymać pomoc oraz szczegółowe informacje.</p>
+                    <a class="btn btn-primary" href="#">Wiecej</a>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Pożyczka na dowolny cel</h3>
+                    <p>Potrzebujesz pięniędzy na teraz? Weź pożyczkę na co tylko chcesz i spełnij swoje marzenia.</p>
+                    <a class="btn btn-primary" href="#">Wiecej</a>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <hr />
+            <div class="container">
+                <div class="pull-left">SBI 2016 (<small>Dominik Paluch</small>) </div>
+                <div class="pull-right"><a href="#" style="text-decoration: none;">dpaluch92@gmail.com</a></div>
+            </div>
+            <br />
+        </footer>
+    </div>
+</body>
+
+</html>
