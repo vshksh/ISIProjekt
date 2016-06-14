@@ -190,32 +190,31 @@ public class Kontroler {
             String typ = jt.queryForObject("SELECT rola FROM `konta` WHERE login = '" + currentPrincipalName + "'", String.class);
             if (typ.equals("USER"))
             {
-                modelAndView.addObject("title", "System Bankowosci Internetowej");
-                modelAndView.addObject("message", "Witamy!");
-                modelAndView.setViewName("kontoIndywidualne"); //nazwa strony .jsp zwracanej po wywolaniu metody
+		modelAndView.addObject("title", "System Bankowosci Internetowej");
+		modelAndView.addObject("message", "Witamy!");
+		modelAndView.setViewName("kontoIndywidualne");
             }
             
             else if (typ.equals("ADMIN"))
             {
                 modelAndView.addObject("title", "System Bankowosci Internetowej");
                 modelAndView.addObject("message", "Witamy!");
-                modelAndView.setViewName("kontoAdmina"); //nazwa strony .jsp zwracanej po wywolaniu metody
+                modelAndView.setViewName("kontoAdmina");
             }
             
             else if (typ.equals("BANK"))
             {
                 modelAndView.addObject("title", "System Bankowosci Internetowej");
                 modelAndView.addObject("message", "Witamy!");
-                modelAndView.setViewName("kontoBankiera"); //nazwa strony .jsp zwracanej po wywolaniu metody
+                modelAndView.setViewName("kontoBankiera");       
             }
             else 
             {
                 modelAndView.addObject("title", "System Bankowosci Internetowej");
                 modelAndView.addObject("message", "Witamy!");
-                modelAndView.setViewName("NiepoprawnyTyp"); //nazwa strony .jsp zwracanej po wywolaniu metody
+                modelAndView.setViewName("brakuprawnien");
             }
-            
-            
             return modelAndView;
         }
+
 }

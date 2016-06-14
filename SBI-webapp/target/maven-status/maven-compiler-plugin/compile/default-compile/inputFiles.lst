@@ -5,6 +5,7 @@ C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\m
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\Security\SpringSecurityInitializer.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\DataTransferObjects\FormularzRejestracjiDTO.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\DataTransferObjects\PrzelewDTO.java
+C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\AkcjaBankiera.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\DataTransferObjects\Konta.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\DataTransferObjects\Kredyty.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\config\SecurityConfig.java
@@ -12,6 +13,7 @@ C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\m
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\Kontroler.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\DataTransferObjects\Rachunki.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\DataTransferObjects\Oferty.java
+C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\KontrolerBankiera.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\KredytZatwierdzany.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\DataTransferObjects\RachunkiMapper.java
 C:\Users\Przemek\Desktop\programowanie\ISIProjekt\SBI-webapp\src\main\java\com\mycompany\DaneKredyt.java
