@@ -12,10 +12,11 @@
     <body>
         
         <form:form method="POST" modelAttribute="formularzKr">   
-            <th>Podaj id kredytu który chcesz zatwierdzić</th>
+            <th>Podaj id kredytu który chcesz zatwierdzić/odrzucić</th>
               <td><form:input type="number" path="id" /><form:errors path="id" /></td>
 
-        <input type="submit" name="action" value="Zatwierdź" />
+        <input type="submit" name="action" value="Zatwierdz" />
+        <input type="submit" name="action" value="Odrzuc" />
        </form:form>
 
         

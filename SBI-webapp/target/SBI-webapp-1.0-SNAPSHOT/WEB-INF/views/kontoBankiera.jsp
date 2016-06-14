@@ -9,6 +9,7 @@
     </head>
     <body>
         <h1>Strona bankiera!</h1> 
-        <a href="<c:url value="/zatwierdzkredyt"/>"><img src="image/icon4.jpg"></a>Zatwierdz kredyt
+        <a href="<c:url value="/zatwierdzkredyt"/>"><img src="image/icon4.jpg"></a>Zatwierdz/odrzuć kredyt
+        <a href="<c:url value="/przejrzyjkredyt"/>"><img src="image/icon4.jpg"></a>Przejrzyj kredyt
     </body>
 </html>

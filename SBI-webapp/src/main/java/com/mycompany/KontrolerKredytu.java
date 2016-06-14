@@ -192,8 +192,8 @@ public class KontrolerKredytu
                 zdolnosc=0; //odmowa kredytu
             }
             // wartości do zmiany
-            double prowizja=5/zdolnosc; 
-            double oprocentowanie=7/zdolnosc; 
+            double prowizja=2/zdolnosc; 
+            double oprocentowanie=6/zdolnosc; 
             
              return new ModelAndView("DaneDoOferty", "formularzOf", new DaneOferty (kwota,okres,zdolnosc, prowizja, oprocentowanie,waluta,rachunek));
         }

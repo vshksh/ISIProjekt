@@ -53,11 +53,51 @@ public class KontrolerPotwierdzaniaKredytow
   }
   
      @RequestMapping(value =  "/zatwierdzkredyt" , method = RequestMethod.POST)
-  public String reqZatwierdzKredytPOST(@RequestParam int id) 
+  public String reqZatwierdzKredytPOST(@RequestParam int id,
+          @RequestParam String action) 
+  {
+      String SQL="";
+      JdbcTemplate jt = new JdbcTemplate(dataSource);
+      if (action.equals("Zatwierdz"))
+      {
+          SQL="UPDATE kredyty SET zatwierdzenie=1 WHERE ID_kredytu="+id;
+      }
+      else if (action.equals("Odrzuc"))
+      {
+          SQL="UPDATE kredyty SET zatwierdzenie=-1 WHERE ID_kredytu="+id;
+      }
+      jt.execute(SQL);
+      return "redirect:/kontoBankiera"; 
+  }
+  
+    @RequestMapping(value =  "/przejrzyjkredyt" , method = RequestMethod.GET)
+  public ModelAndView reqPrzejrzyjKredytGET() 
   {
       JdbcTemplate jt = new JdbcTemplate(dataSource);
-      String SQL="UPDATE kredyty SET zatwierdzenie=1 WHERE ID_kredytu="+id;
-      jt.execute(SQL);
-      return "redirect:/"; 
+      Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+      String currentPrincipalName = authentication.getName();
+      String rola="";
+      try 
+      {	
+         rola = jt.queryForObject("SELECT rola FROM `konta` WHERE login = '" + currentPrincipalName + "'", String.class);
+      }
+      catch (EmptyResultDataAccessException e) 
+      {
+	return new ModelAndView("brakuprawnien");
+      }		
+      if (!rola.equals("BANK"))
+      {
+        return new ModelAndView("brakuprawnien");
+      }
+      return new ModelAndView("przejrzyjkredyt", "formularzKr1", new Kredyty());
+  }
+  
+     @RequestMapping(value =  "/przejrzyjkredyt" , method = RequestMethod.POST)
+  public String reqPrzeyjrzyjKredytPOST(@RequestParam int id) 
+  {
+      JdbcTemplate jt = new JdbcTemplate(dataSource);
+      double kwota=jt.queryForObject("SELECT kwota FROM `kredyty` WHERE ID_kredytu = " + id , Double.class);
+      return "redirect:/PokazKredyt";
   }
 }
+  
