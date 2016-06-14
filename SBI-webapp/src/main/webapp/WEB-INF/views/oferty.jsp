@@ -49,8 +49,16 @@
           <div class="navbar-header">
           </div>
           <div id="navbar" class="navbar-collapse collapse">
-                            ${ileofert}
-                                
+                    <c:forEach begin="0" end="${ileofert-1}" var="i">
+                        <c:set var="nazwa" scope="session" value="nazwa${i}"/>
+                        <c:set var="typ" scope="session" value="typ{i}"/>
+                        <c:set var="limity" scope="session" value="limity{i}"/>
+                        <c:set var="procent" scope="session" value="procent{i}"/>
+                        Nazwa oferty ${i+1}: ${nazwa} <br>
+                        typ ${i+1}: ${typ}<br>
+                        limity ${i+1}: ${limity}<br>
+                        procent ${i+1}: ${procent}<br>
+                    </c:forEach>
 
             </ul>
               
