@@ -21,6 +21,9 @@
         </th>
         </tr>
         <tr>
+            <th>Na którym rachunku chciałbyś mieć kredyt</th>
+              <td><form:input type="number" path="rachunek" /><form:errors path="kwota" /></td>
+            
               <th>Kwota kredytu</th>
               <td><form:input type="number" path="kwota" /><form:errors path="kwota" /></td>
 	</tr>
@@ -28,6 +31,8 @@
         <tr>
               <th>Okres</th>
               <td><form:input type="number" path="okres" /><form:errors path="okres" /></td> 
+              <th>Waluta</th>
+              <td><form:input type="text" path="waluta" /><form:errors path="okres" /></td> 
 	</tr>
         <tr>
         <th> 

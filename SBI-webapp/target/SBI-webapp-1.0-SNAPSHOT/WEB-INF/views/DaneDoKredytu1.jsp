@@ -10,7 +10,7 @@
         <title>Formularz pobierania kredytu</title>
     </head>
     <body>
-        <h1>Prosimy o podanie danych potrzebnych do zaoferowania odpowiedniego kredytu</h1>
+        <h1>Prosimy o przeslanie danych jeszcze raz w celu ich potwierdzenia</h1>
          <strong>${message}</strong>
         
         <form:form method="POST" modelAttribute="formularzKr">       
@@ -105,7 +105,7 @@
 
               </table>
 
-        <input type="submit" name="action" value="Sprawdz dostepny kredyt" />
+        <input type="submit" name="action" value="Weź kredyt" />
        </form:form>
 
         

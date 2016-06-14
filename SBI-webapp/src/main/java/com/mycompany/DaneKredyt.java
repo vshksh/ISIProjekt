@@ -20,6 +20,25 @@ public class DaneKredyt
     private String formazatrudnienia="";
     private int ile_w_domu=0; // liczba osób w gospodarstwie domowym
     private int lacznydochod=0; // laczny dochod w gospodarstwie domowym
+    private String waluta="";
+    private int rachunek=0;
+
+    public String getWaluta() {
+        return waluta;
+    }
+
+    public void setWaluta(String waluta) {
+        this.waluta = waluta;
+    }
+
+    public int getRachunek() {
+        return rachunek;
+    }
+
+    public void setRachunek(int rachunek) {
+        this.rachunek = rachunek;
+    }
+    
 
     public int getKwota() {
         return kwota;

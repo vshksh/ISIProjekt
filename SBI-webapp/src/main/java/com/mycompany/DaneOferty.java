@@ -16,6 +16,26 @@ public class DaneOferty
     private double zdolnosc_kredytowa=0;
     private double prowizja=0;
     private double oprocentowanie=0;
+    private String waluta="";
+    private int rachunek=0;
+
+    public int getRachunek() {
+        return rachunek;
+    }
+
+    public void setRachunek(int rachunek) {
+        this.rachunek = rachunek;
+    }
+    
+
+    public String getWaluta() {
+        return waluta;
+    }
+
+    public void setWaluta(String waluta) {
+        this.waluta = waluta;
+    }
+    
 
     public double getProwizja() {
         return prowizja;
@@ -57,13 +77,15 @@ public class DaneOferty
         this.zdolnosc_kredytowa = zdolnosc_kredytowa;
     }
     
-    public DaneOferty (int kwota, int okres, double zdolnosc, double prowizja, double oprocentowanie)
+    public DaneOferty (int kwota, int okres, double zdolnosc, double prowizja, double oprocentowanie, String waluta, int rachunek)
     {
         this.kwota=kwota;
         this.okres=okres;
         this.zdolnosc_kredytowa=zdolnosc;
         this.prowizja=prowizja;
         this.oprocentowanie=oprocentowanie;
+        this.waluta=waluta;
+        this.rachunek=rachunek;
     }
     
 }

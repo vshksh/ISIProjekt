@@ -19,8 +19,8 @@
         <form:form method="POST" modelAttribute="formularzOf">
             <input type="submit" name="action" value="Strona glowna" />
             <input type="submit" name="action" value="zmiana danych" />
+            <input type="submit" name="action" value="Wez kredyt" />
         </form:form>
         
-        <%-- póki co nie ma zrobionego bankiera więc nie ma na razie złożenia wniosku --%>
     </body>
 </html>
