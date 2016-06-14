@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
  * 
@@ -56,10 +57,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                   .defaultSuccessUrl("/zalogowano")
 		  .usernameParameter("login").passwordParameter("haslo")
 		.and()
-		  .logout().logoutSuccessUrl("/login?logout")
+                 .logout()
+                  .logoutUrl("/logout") 
+		  .logoutSuccessUrl("/logout-success")
+                  .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 		.and()
 		  .exceptionHandling().accessDeniedPage("/403")
 		.and()
 		  .csrf();
 	}
+        
 }
