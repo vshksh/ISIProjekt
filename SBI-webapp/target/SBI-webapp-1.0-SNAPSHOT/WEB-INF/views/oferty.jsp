@@ -53,11 +53,11 @@
                         <c:set var="nazwapomoc" value="nazwa${i}" />
                         <c:set var="typpomoc" value="typ${i}" />
                         <c:set var="limitypomoc" value="limity${i}" />
-                        <c:set var="limitypomoc" value="procent${i}" />
+                        <c:set var="procentpomoc" value="procent${i}" />
                         <c:set var="nazwa" scope="page" value="${requestScope[nazwapomoc]}"/> 
                         <c:set var="typ" scope="page" value="${requestScope[typpomoc]}"/>
                         <c:set var="limity" scope="page" value="${requestScope[limitypomoc]}"/>
-                        <c:set var="procent" scope="page" value="${requestScope[limitypomoc]}"/>
+                        <c:set var="procent" scope="page" value="${requestScope[procentpomoc]}"/>
                         Nazwa oferty ${i+1}: ${nazwa} <br>
                         typ ${i+1}: ${typ}<br>
                         limity ${i+1}: ${limity}<br>
