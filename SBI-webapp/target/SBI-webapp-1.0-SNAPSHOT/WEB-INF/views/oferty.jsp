@@ -50,10 +50,14 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
                     <c:forEach begin="0" end="${ileofert-1}" var="i">
-                        <c:set var="nazwa" scope="session" value="nazwa${i}"/>
-                        <c:set var="typ" scope="session" value="typ{i}"/>
-                        <c:set var="limity" scope="session" value="limity{i}"/>
-                        <c:set var="procent" scope="session" value="procent{i}"/>
+                        <c:set var="nazwapomoc" value="nazwa${i}" />
+                        <c:set var="typpomoc" value="typ${i}" />
+                        <c:set var="limitypomoc" value="limity${i}" />
+                        <c:set var="limitypomoc" value="procent${i}" />
+                        <c:set var="nazwa" scope="page" value="${requestScope[nazwapomoc]}"/> 
+                        <c:set var="typ" scope="page" value="${requestScope[typpomoc]}"/>
+                        <c:set var="limity" scope="page" value="${requestScope[limitypomoc]}"/>
+                        <c:set var="procent" scope="page" value="${requestScope[limitypomoc]}"/>
                         Nazwa oferty ${i+1}: ${nazwa} <br>
                         typ ${i+1}: ${typ}<br>
                         limity ${i+1}: ${limity}<br>
