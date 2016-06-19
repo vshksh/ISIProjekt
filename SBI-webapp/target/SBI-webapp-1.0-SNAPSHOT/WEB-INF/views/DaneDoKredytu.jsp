@@ -106,6 +106,7 @@
               </table>
 
         <input type="submit" name="action" value="Sprawdz dostepny kredyt" />
+        <input type="submit" name="action" value="Strona glowna" />
        </form:form>
 
         

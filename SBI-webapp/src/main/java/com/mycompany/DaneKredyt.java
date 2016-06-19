@@ -21,7 +21,35 @@ public class DaneKredyt
     private int ile_w_domu=0; // liczba osób w gospodarstwie domowym
     private int lacznydochod=0; // laczny dochod w gospodarstwie domowym
     private String waluta="";
+    private double zdolnosc_kredytowa=0;
+    private double prowizja=0;
+    private double oprocentowanie=0;
     private int rachunek=0;
+
+    public double getZdolnosc_kredytowa() {
+        return zdolnosc_kredytowa;
+    }
+
+    public void setZdolnosc_kredytowa(double zdolnosc_kredytowa) {
+        this.zdolnosc_kredytowa = zdolnosc_kredytowa;
+    }
+
+    public double getProwizja() {
+        return prowizja;
+    }
+
+    public void setProwizja(double prowizja) {
+        this.prowizja = prowizja;
+    }
+
+    public double getOprocentowanie() {
+        return oprocentowanie;
+    }
+
+    public void setOprocentowanie(double oprocentowanie) {
+        this.oprocentowanie = oprocentowanie;
+    }
+    
 
     public String getWaluta() {
         return waluta;
