@@ -267,6 +267,16 @@ public class KontrolerKredytu
             ++id;
             String SQL="INSERT INTO kredyty (ID_kredytu,kwota,waluta,oprocentowanie,termin_splaty,naliczone_odsetki,rachunkinumer_rachunku) VALUES ("+id+","+DaneKredyt1.getKwota()+","+oprocentowanie1+",now()+interval "+DaneKredyt1.getOkres()+" month ,0,"+DaneKredyt1.getRachunek()+");" ;
             jt.execute(SQL);
-        return "redirect:/"; //jakby ktoś miał czas to można zrobić jakąś stronę w stylu "gratki, udało ci się wziąć kredyt
+            String typ = jt.queryForObject("SELECT rola FROM `konta` WHERE login = '" + currentPrincipalName + "'", String.class);
+            // poniewaz trzeba miec rachunek żeby wziąć kredyt, powinno zawsze wracać na stronę zalogowanego użytkownika
+            if (typ.equals("USER")||typ.equals("ADMIN")||typ.equals("BANK"))
+            {
+		return "redirect:/zalogowano";
+            }
+            else
+            {
+                 return "redirect:/"; //jakby ktoś miał czas to można zrobić jakąś stronę w stylu "gratki, udało ci się wziąć kredyt
+            }
+           
     }  
 }
