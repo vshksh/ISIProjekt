@@ -80,12 +80,128 @@ public class KontrolerKredytu
         {
            return "redirect:/oferta"; 
         }
+        else if ( action.equals("Sprawdz dostepny kredyt bez podawania rachunku w naszym banku") )
+        {
+           return "redirect:/oferta1"; 
+        }
         else
         {
             return "redirect:/blad"; // nie powinno to nigdy wyjsc i poki co prowadzi w puste miejsce, można potem wstawić jakąś stronę błędu
         }       
     }
     
+    @RequestMapping(value = "/oferta1", method=RequestMethod.GET)
+    public ModelAndView reqOferta1GET(HttpServletRequest request)   
+        {
+            DaneKredyt DaneKredyt1=(DaneKredyt)request.getSession().getAttribute("DaneKredyt1");          
+            /**
+             * obliczanie zdolnosci kredytowej
+             */
+            double zdolnosc=1;
+            
+            
+            if (DaneKredyt1.getStancywilny().equals("separacja"))
+            {
+                zdolnosc=zdolnosc*0.8;
+            }
+            else if (DaneKredyt1.getStancywilny().equals("malzenstwo"))
+            {
+                zdolnosc=zdolnosc*1.2;
+            }
+            
+            if (DaneKredyt1.getFormazatrudnienia().equals("emerytura")||DaneKredyt1.getFormazatrudnienia().equals("renta"))
+            {
+                zdolnosc=zdolnosc*0.7;
+            }
+            else if (DaneKredyt1.getFormazatrudnienia().equals("zlecenie")||DaneKredyt1.getFormazatrudnienia().equals("wojsko"))
+            {
+                zdolnosc=zdolnosc*0.8;
+            }
+            else if (DaneKredyt1.getFormazatrudnienia().equals("menager")||DaneKredyt1.getFormazatrudnienia().equals("radny"))
+            {
+                zdolnosc=zdolnosc*1.1;
+            }
+            else if (DaneKredyt1.getFormazatrudnienia().equals("prezes")||DaneKredyt1.getFormazatrudnienia().equals("posel"))
+            {
+                zdolnosc=zdolnosc*1.3;
+            }
+            
+            if (DaneKredyt1.getWyksztalcenie().equals("podstawowe"))
+            {
+                zdolnosc=zdolnosc*0.7;
+            }
+            else if (DaneKredyt1.getWyksztalcenie().equals("srednie"))
+            {
+                zdolnosc=zdolnosc*0.8;
+            }
+            else if (DaneKredyt1.getWyksztalcenie().equals("dr"))
+            {
+                zdolnosc=zdolnosc*1.1;
+            }
+            
+            if (DaneKredyt1.getStatusmieszkaniowy().equals("wlasne"))
+            {
+                zdolnosc=zdolnosc*1.2;
+            }
+            else if (DaneKredyt1.getStatusmieszkaniowy().equals("sluzbowe"))
+            {
+                zdolnosc=zdolnosc*0.7;
+            }
+            else if (DaneKredyt1.getStatusmieszkaniowy().equals("wynajem"))
+            {
+                zdolnosc=zdolnosc*0.9;
+            }
+            
+            if (DaneKredyt1.getIle_w_domu()>2)
+            {
+                zdolnosc=zdolnosc*1.1;
+            }
+            else if (DaneKredyt1.getIle_w_domu()==1)
+            {
+                zdolnosc=zdolnosc*0.8;
+            }
+            
+            /**
+             * kredyty na dom itp
+             */
+            if (DaneKredyt1.getOkres()>240)
+            {
+                if (DaneKredyt1.getLacznydochod()*DaneKredyt1.getOkres()/2*zdolnosc<DaneKredyt1.getKwota()) 
+                {
+                    zdolnosc=0; //odmowa kredytu
+                }
+            }
+            else if (DaneKredyt1.getLacznydochod()*5*zdolnosc<DaneKredyt1.getKwota())
+            {
+                zdolnosc=0; //odmowa kredytu
+            }
+            // wartości do zmiany
+            double prowizja=2/zdolnosc; 
+            double oprocentowanie=6/zdolnosc; 
+            DaneKredyt1.setProwizja(prowizja);
+            DaneKredyt1.setOprocentowanie(oprocentowanie);
+            DaneKredyt1.setZdolnosc_kredytowa(zdolnosc);
+            request.getSession().setAttribute("DaneKredyt1",DaneKredyt1);
+            
+             return new ModelAndView("DaneDoOferty1", "formularzOf", DaneKredyt1);
+        }
+    
+    @RequestMapping(value = "/oferta1", method=RequestMethod.POST)
+    public String reqOferta1POST(@RequestParam (value = "action") String action)   
+        {
+            if ( action.equals("Strona glowna") )
+            {
+                return "redirect:/"; 
+            }
+            else if ( action.equals("zmiana danych") )
+            {
+                return "redirect:/kredyt"; 
+            }
+            else
+            {
+                return "redirect:/blad"; // nie powinno to nigdy wyjsc i poki co prowadzi w puste miejsce, można potem wstawić jakąś stronę błędu
+            }    
+        }
     
     @RequestMapping(value = "/oferta", method=RequestMethod.GET)
     public ModelAndView reqOfertaGET(HttpServletRequest request)   
