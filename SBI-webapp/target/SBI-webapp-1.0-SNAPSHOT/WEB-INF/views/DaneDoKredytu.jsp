@@ -23,8 +23,6 @@
         <tr>
             <th>Na którym rachunku chciałbyś mieć kredyt</th>
             <c:set var="typ1" value="${typ}" />
-            ${typ}
-            ${typ1}
             <c:if test="${typ1 != 'USER'}">
                 <td><form:select path="rachunek">
                    <form:option value="0">Nie jestes zalogowany na konto klienta wiec nie masz rachunku</form:option>  
