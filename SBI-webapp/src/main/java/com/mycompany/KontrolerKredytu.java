@@ -7,6 +7,7 @@ package com.mycompany;
 
 import com.mycompany.DataTransferObjects.*;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,9 +42,36 @@ public class KontrolerKredytu
       @RequestMapping(value="/kredyt", method=RequestMethod.GET)
     public ModelAndView reqKredytGET(HttpServletRequest request) 
     {
-        DaneKredyt DaneKredyt1=new DaneKredyt();
+        DaneKredyt DaneKredyt1=new DaneKredyt();    
         request.getSession().setAttribute("DaneKredyt1",DaneKredyt1);
-        return new ModelAndView("DaneDoKredytu", "formularzKr", new DaneKredyt());
+        ModelAndView model= new ModelAndView("DaneDoKredytu", "formularzKr", DaneKredyt1);
+        JdbcTemplate jt = new JdbcTemplate(dataSource);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        String typ="";
+        try 
+        {	
+            typ = jt.queryForObject("SELECT rola FROM `konta` WHERE login = '" + currentPrincipalName+ "'", String.class);
+        }
+        catch (EmptyResultDataAccessException e) 
+        {
+            typ="";
+        }
+        model.addObject("typ",typ);
+        if (typ.equals("USER"))
+        {
+            String SQL = "SELECT * FROM `rachunki`";
+            List<RachunkiDTO> rachunki = jt.query(SQL, new RachunkiMapper());
+            int liczbarachunkow = rachunki.size();
+            Integer liczba=liczbarachunkow;
+            model.addObject("ilerachunkow", liczba);
+            for (int i=0;i<liczbarachunkow;i++)
+            {
+                model.addObject("numer"+i, rachunki.get(i).getNumerRachunku());
+                model.addObject("saldo"+i, rachunki.get(i).getSaldo());
+            }
+        }
+        return model;
     }
     
     @RequestMapping(value = "/kredyt", method=RequestMethod.POST)
@@ -58,7 +86,7 @@ public class KontrolerKredytu
             @RequestParam(value = "ile_w_domu") int ile_w_domu,
             @RequestParam(value = "lacznydochod") int lacznydochod,
             @RequestParam(value = "waluta") String waluta,
-            @RequestParam(value = "rachunek") int rachunek) 
+            @RequestParam(value = "rachunek") String rachunek) 
     {
         DaneKredyt DaneKredyt1=(DaneKredyt)request.getSession().getAttribute("DaneKredyt1");
         DaneKredyt1.setFormazatrudnienia(praca);

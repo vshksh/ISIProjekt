@@ -22,7 +22,25 @@
         </tr>
         <tr>
             <th>Na którym rachunku chciałbyś mieć kredyt</th>
-              <td><form:input type="number" path="rachunek" /><form:errors path="kwota" /></td>
+            <c:set var="typ1" value="${typ}" />
+            ${typ}
+            ${typ1}
+            <c:if test="${typ1 != 'USER'}">
+                <td><form:select path="rachunek">
+                   <form:option value="0">Nie jestes zalogowany na konto klienta wiec nie masz rachunku</form:option>  
+                </form:select>
+            </c:if>
+            <c:if test="${typ == 'USER'}">
+                <td><form:select path="rachunek">
+                   <c:forEach begin="0" end="${ilerachunkow-1}" var="i">
+                        <c:set var="numerpomoc" value="numer${i}" />
+                        <c:set var="saldopomoc" value="saldo${i}" />
+                        <c:set var="numer" scope="page" value="${requestScope[numerpomoc]}"/> 
+                        <c:set var="saldo" scope="page" value="${requestScope[saldopomoc]}"/>
+                        <form:option value="${numer}">rachunek o numerze ${numer} i saldzie ${saldo}</form:option>
+                    </c:forEach>  
+                </form:select>
+            </c:if>       
             
               <th>Kwota kredytu</th>
               <td><form:input type="number" path="kwota" /><form:errors path="kwota" /></td>

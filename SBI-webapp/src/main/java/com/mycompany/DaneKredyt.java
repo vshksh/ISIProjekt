@@ -24,7 +24,7 @@ public class DaneKredyt
     private double zdolnosc_kredytowa=0;
     private double prowizja=0;
     private double oprocentowanie=0;
-    private int rachunek=0;
+    private String rachunek="";
 
     public double getZdolnosc_kredytowa() {
         return zdolnosc_kredytowa;
@@ -59,11 +59,11 @@ public class DaneKredyt
         this.waluta = waluta;
     }
 
-    public int getRachunek() {
+    public String getRachunek() {
         return rachunek;
     }
 
-    public void setRachunek(int rachunek) {
+    public void setRachunek(String rachunek) {
         this.rachunek = rachunek;
     }
     
