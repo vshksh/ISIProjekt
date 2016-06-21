@@ -6,7 +6,7 @@
             <html lang="pl">
 
             <head>
-                <title>Panel bankiera</title>
+                <title>Moje rachunki</title>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -33,13 +33,17 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <span class="navbar-brand">Panel bankiera</span>
+                                <span class="navbar-brand">Moje rachunki</span>
                             </div>
                             <div class="collapse navbar-collapse " id="myNavbar2">
                                 <ul class="nav navbar-nav">
                                     <li><a href="<c:url value="/zalogowano" />">Strona Główna</a></li>
-                                    <li><a href="<c:url value="/zatwierdzkredyt"/>">Zatwierdz/odrzuć kredyt</a></li>
-                                    <li><a href="<c:url value="/przejrzyjkredyt"/>">Przejrzyj kredyt</a></li>
+                                    <li><a href="<c:url value="/rachunki" />">Stan rachunku</a></li>
+                                    <li><a href="<c:url value="/mojekarty" />">Moje karty</a></li>
+                                    <li><a href="<c:url value="/kredyt" />">Moje kredyty</a></li>
+                                    <li><a href="<c:url value="/bierzkredyt" />">Weź kredyt</a></li>
+                                    <li><a href="<c:url value="/mojelokaty" />">Moje lokaty</a></li>
+                                    <li><a href="<c:url value="/nowalokata" />">Otwórz lokatę</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li>
@@ -53,20 +57,27 @@
 
                     <div class="content">
                         <div class="container-fluid">
-                       <font size="4">
-                <div class="col-sm-7">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <h4><a href="<c:url value="/zatwierdzkredyt" />" class="btn btn-default btn-circle btn-info">Zatwierdz/odrzuć kredyt<span class="glyphicon glyphicon-share"></span></a></h4>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4><a href="<c:url value="/przejrzyjkredyt" />" class="btn btn-default btn-circle btn-info">Przejrzyj kredyt<span class="glyphicon glyphicon-list-alt"></span></a></h4>
-                        </div>
-                    </div>
+                            <font size="4">
+              <ul>
+                    <c:forEach begin="0" end="${ileplatnosci-1}" var="i">
+                        <c:set var="IDPlatnoscipomoc" value="IDPlatnosci${i}" />
+                        <c:set var="kwotapomoc" value="kwota${i}" />
+                        <c:set var="nazwapomoc" value="nazwa${i}" />
+                        <c:set var="dataPlatnoscipomoc" value="dataPlatnosci${i}" />
+                        <c:set var="IDPlatnosci" scope="page" value="${requestScope[IDPlatnoscipomoc]}"/> 
+                        <c:set var="kwota" scope="page" value="${requestScope[kwotapomoc]}"/>
+                        <c:set var="nazwa" scope="page" value="${requestScope[nazwapomoc]}"/>
+                        <c:set var="dataPlatnosci" scope="page" value="${requestScope[dataPlatnoscipomoc]}"/>
+                        ID płatności: ${i+1}: ${IDPlatnosci} <br>
+                        Kwota płatności:  ${i+1}: ${kwota}<br>
+                        Tytuł:  ${i+1}: ${nazwa}<br>
+                        Data wykonania płatności: ${i+1}: ${dataPlatnosci}<br>
+                        <br>
+                        <br>
+                    </c:forEach>
 
-                </div>
-            </div>
-                                </font>
+            </ul>
+                            </font>
                         </div>
                     </div>
                 </div>

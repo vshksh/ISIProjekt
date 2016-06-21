@@ -6,7 +6,7 @@
             <html lang="pl">
 
             <head>
-                <title>Panel bankiera</title>
+                <title>Moje rachunki</title>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -14,9 +14,7 @@
                 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
                 <style>
-                    ul {
-                        list-style-type: none;
-                    }
+
                     
                 </style>
             </head>
@@ -33,13 +31,17 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <span class="navbar-brand">Panel bankiera</span>
+                                <span class="navbar-brand">Moje rachunki</span>
                             </div>
                             <div class="collapse navbar-collapse " id="myNavbar2">
                                 <ul class="nav navbar-nav">
                                     <li><a href="<c:url value="/zalogowano" />">Strona Główna</a></li>
-                                    <li><a href="<c:url value="/zatwierdzkredyt"/>">Zatwierdz/odrzuć kredyt</a></li>
-                                    <li><a href="<c:url value="/przejrzyjkredyt"/>">Przejrzyj kredyt</a></li>
+                                    <li><a href="<c:url value="/rachunki" />">Stan rachunku</a></li>
+                                    <li><a href="<c:url value="/mojekarty" />">Moje karty</a></li>
+                                    <li><a href="<c:url value="/kredyt" />">Moje kredyty</a></li>
+                                    <li><a href="<c:url value="/bierzkredyt" />">Weź kredyt</a></li>
+                                    <li><a href="<c:url value="/mojelokaty" />">Moje lokaty</a></li>
+                                    <li><a href="<c:url value="/nowalokata" />">Otwórz lokatę</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li>
@@ -53,20 +55,14 @@
 
                     <div class="content">
                         <div class="container-fluid">
-                       <font size="4">
-                <div class="col-sm-7">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <h4><a href="<c:url value="/zatwierdzkredyt" />" class="btn btn-default btn-circle btn-info">Zatwierdz/odrzuć kredyt<span class="glyphicon glyphicon-share"></span></a></h4>
-                        </div>
-                        <div class="col-sm-4">
-                            <h4><a href="<c:url value="/przejrzyjkredyt" />" class="btn btn-default btn-circle btn-info">Przejrzyj kredyt<span class="glyphicon glyphicon-list-alt"></span></a></h4>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-                                </font>
+                            <font size="4">
+                            Projekt wykonany na przedmiot Inżynieria Systemów Informacyjnych.
+                            Wykonali:
+                            <ul>Mateusz Biały</ul>
+                            <ul>Jeremiasz Czaja</ul>
+                            <ul>Przemysław Pajestka</ul>
+                            <ul>Dominik Paluch</ul>
+                            </font>
                         </div>
                     </div>
                 </div>

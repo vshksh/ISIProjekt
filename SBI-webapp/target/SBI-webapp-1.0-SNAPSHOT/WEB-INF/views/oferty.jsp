@@ -20,25 +20,15 @@
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="#">Nasze oferty</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li><a href="#">Klienci indywidualni</a></li>
-              <li><a href="#">Bankowość internetowa</a></li>
-              <li><a href="#">Biznes</a></li>
-              <li><a href="#">Przedsiębiorstwa</a></li>
               <li><a href="#">O banku</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">
-              	<select name="chooseLang">
-                    <option value="1"><img src="image/en.png" alt="logo" /></option>
-                    <option value="2"><img src="image/en.png" alt="logo" /></option>
-              	</select>
-              </a></li>
-              <li><a href="#">Kontakt</a></li>
-            </ul>
+              <li><a href="<c:url value="/" />">Strona Główna</a></li>
+              <li><a href="<c:url value="/rejestracja" />">Rejestracja</a></li>
+              <li><a href="<c:url value="/login" />">Logowanie</a></li>
+
           </div>
         </div>
       </nav>
@@ -49,6 +39,7 @@
           <div class="navbar-header">
           </div>
           <div id="navbar" class="navbar-collapse collapse">
+              <ul>
                     <c:forEach begin="0" end="${ileofert-1}" var="i">
                         <c:set var="nazwapomoc" value="nazwa${i}" />
                         <c:set var="typpomoc" value="typ${i}" />
@@ -62,6 +53,8 @@
                         typ ${i+1}: ${typ}<br>
                         limity ${i+1}: ${limity}<br>
                         procent ${i+1}: ${procent}<br>
+                        <br>
+                        <br>
                     </c:forEach>
 
             </ul>

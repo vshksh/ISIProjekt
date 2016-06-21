@@ -56,17 +56,12 @@
          
         <tr>
               <th>Podaj numer rachunku docelowego:</th>
-              <td><form:input type="text" path="rachunekDoc" /><form:errors path="rachunekDoc" /></td>
+              <td><form:input type="text" path="rachunekOdbiorcy" /><form:errors path="rachunekOdbiorcy" /></td>
 	</tr>
         
         <tr>
               <th>Podaj kwotę przelewu:</th>
               <td><form:input type="number" path="kwota" /><form:errors path="kwota" /></td>
-	</tr>
-        
-        <tr>
-              <th>Podaj walutę:</th>
-              <td><form:input type="text" path="waluta" /><form:errors path="waluta" /></td>
 	</tr>
         
         <tr>

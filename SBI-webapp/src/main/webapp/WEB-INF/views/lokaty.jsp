@@ -1,4 +1,5 @@
- <%@page contentType="text/html" pageEncoding="UTF-8"%>
+      
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
@@ -6,7 +7,7 @@
             <html lang="pl">
 
             <head>
-                <title>Moje karty</title>
+                <title>Moje lokaty</title>
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1">
                 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -33,17 +34,17 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <span class="navbar-brand">Moje karty</span>
+                                <span class="navbar-brand">Moje lokaty</span>
                             </div>
                             <div class="collapse navbar-collapse " id="myNavbar2">
                                 <ul class="nav navbar-nav">
                                     <li><a href="<c:url value="/zalogowano" />">Strona Główna</a></li>
                                     <li><a href="<c:url value="/rachunki" />">Stan rachunku</a></li>
                                     <li><a href="<c:url value="/mojekarty" />">Moje karty</a></li>
-                                    <li><a href="<c:url value="/kredyt" />">Moje kredyty</a></li>
-                                    <li><a href="<c:url value="/kredyt" />">Weź kredyt</a></li>
-                                    <li><a href="<c:url value="/mojelokaty" />">Moje lokaty</a></li>
-                                    <li><a href="<c:url value="/nowalokata" />">Otwórz lokatę</a></li>
+									<li><a href="<c:url value="/kredyt" />">Moje kredyty</a></li>
+									<li><a href="<c:url value="/kredyt" />">Weź kredyt</a></li>
+									<li><a href="<c:url value="/mojelokaty" />">Moje lokaty</a></li>
+									<li><a href="<c:url value="/nowalokata" />">Otwórz lokatę</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li>
@@ -57,25 +58,58 @@
 
                     <div class="content">
                         <div class="container-fluid">
-                        <font size="4">
+			<font size="4">
                             <ul>
-                                <li>
+                                ${informacjaOKarcie}
 
-                                    ${informacjaOKarcie} ${numerKarty}
+                                <li>
+                                    ${infODacieZalLokaty1} ${dataZalLokaty1}
                                 </li>
                                 <li>
-                                    ${infONrKarty1} ${nrKarty1} ${infODacieWaz1} ${dataWaznosciKarty1} ${infOLimicie1} ${limitKarty1} ${infOStatusie1} ${statusKarty1}
+                                    ${infODacieZakLokaty1} ${dataZakLokaty1}
                                 </li>
                                 <li>
-                                    ${infONrKarty2} ${nrKarty2} ${infODacieWaz2} ${dataWaznosciKarty2} ${infOLimicie2} ${limitKarty2} ${infOStatusie2} ${statusKarty2}
+                                    ${infOKwocie1} ${kwotaLokaty1}
                                 </li>
                                 <li>
-                                    ${infONrKarty3} ${nrKarty3} ${infODacieWaz3} ${dataWaznosciKarty3} ${infOLimicie3} ${limitKarty3} ${infOStatusie3} ${statusKarty3}
+                                    ${infOProcencie1} ${procentLokaty1} ${proc1}
+                                </li>
+                                <li>
+                                    ${infONaliczeniach1} ${odsetkiLokaty1}
                                 </li>
 
+                                <li>
+                                    ${infODacieZalLokaty2} ${dataZalLokaty2}
+                                </li>
+                                <li>
+                                    ${infODacieZakLokaty2} ${dataZakLokaty2}
+                                </li>
+                                <li>
+                                    ${infOKwocie2} ${kwotaLokaty2}
+                                </li>
+                                <li>
+                                    ${infOProcencie2} ${procentLokaty2} ${proc2}
+                                </li>
+                                <li>
+                                    ${infONaliczeniach2} ${odsetkiLokaty2}
+                                </li>
+
+                                <li>
+                                    ${infODacieZalLokaty3} ${dataZalLokaty3}
+                                </li>
+                                <li>
+                                    ${infODacieZakLokaty3} ${dataZakLokaty3}
+                                </li>
+                                <li>
+                                    ${infOKwocie3} ${kwotaLokaty3}
+                                </li>
+                                <li>
+                                    ${infOProcencie3} ${procentLokaty1} ${proc3}
+                                </li>
+                                <li>
+                                    ${infONaliczeniach3} ${odsetkiLokaty3}
+                                </li>
                             </ul>
-                                
-                                <p><a href="<c:url value="/historiaplatnosci"/>">Historia Płatności</a></p>
                                 </font>
                         </div>
                     </div>

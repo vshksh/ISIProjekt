@@ -1,86 +1,85 @@
+ <%@page contentType="text/html" pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+            <!DOCTYPE html>
+            <html lang="pl">
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-  <title>Bankowość Internetowa</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-</head>
-<body>
+            <head>
+                <title>Moje karty</title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+                <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<div class="container">
+                <style>
+                    ul {
+                        list-style-type: none;
+                    }
+                    
+                </style>
+            </head>
 
-      <!-- Static navbar -->
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Logo</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a href="#">Klienci indywidualni</a></li>
-              <li><a href="#">Bankowość prywatna</a></li>
-              <li><a href="#">Biznes</a></li>
-              <li><a href="#">Przedsiębiorstwa</a></li>
-              <li><a href="#">O banku</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">
-              	<select name="chooseLang">
-                    <option value="1"><img src="image/en.png" alt="logo" /></option>
-                    <option value="2"><img src="image/en.png" alt="logo" /></option>
-              	</select>
-              </a></li>
-              <li><a href="#">Kontakt</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+            <body>
 
-      <div class="panel">
-      	<nav class="navbar navbar-default">
-        <div class="panel-body">
-          <div class="navbar-header">
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
+                <div class="container">
 
-	<c:if test="${pageContext.request.userPrincipal.name != null}">
-		<h2>Jestes zalogowany jako : ${pageContext.request.userPrincipal.name} 
-                 | <a href="<c:url value="/logout" />" > Logout</a></h2>  
-	</c:if>
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <span class="navbar-brand">Moje karty</span>
+                            </div>
+                            <div class="collapse navbar-collapse " id="myNavbar2">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="<c:url value="/zalogowano" />">Strona Główna</a></li>
+                                    <li><a href="<c:url value="/rachunki" />">Stan rachunku</a></li>
+                                    <li><a href="<c:url value="/mojekarty" />">Moje karty</a></li>
+                                    <li><a href="<c:url value="/kredyt" />">Moje kredyty</a></li>
+                                    <li><a href="<c:url value="/kredyt" />">Weź kredyt</a></li>
+                                    <li><a href="<c:url value="/mojelokaty" />">Moje lokaty</a></li>
+                                    <li><a href="<c:url value="/nowalokata" />">Otwórz lokatę</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        <a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span>Wyloguj</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
 
-					<a href="<c:url value="/zalogowano" />">
-					Moje konto
-					</a>
-                                        <a href="<c:url value="/mojekarty" />">
-					Moje karty
-					</a>
-            <ul>
-				<li>
-                          
-					${informacjaOKarcie} ${numerKarty}
-				</li>
-                                
+
+                    <div class="content">
+                        <div class="container-fluid">
+                        <font size="4">
+                            <ul>
                                 <li>
-                                    <a href="<c:url value="/nowakarta" />">
-					Dodaj now? kart?
-                                    </a>					
-				</li>
 
-            </ul>
+                                    ${informacjaOKarcie} ${numerKarty}
+                                </li>
+                                <li>
+                                    ${infONrKarty1} ${nrKarty1} ${infODacieWaz1} ${dataWaznosciKarty1} ${infOLimicie1} ${limitKarty1} ${infOStatusie1} ${statusKarty1}
+                                </li>
+                                <li>
+                                    ${infONrKarty2} ${nrKarty2} ${infODacieWaz2} ${dataWaznosciKarty2} ${infOLimicie2} ${limitKarty2} ${infOStatusie2} ${statusKarty2}
+                                </li>
+                                <li>
+                                    ${infONrKarty3} ${nrKarty3} ${infODacieWaz3} ${dataWaznosciKarty3} ${infOLimicie3} ${limitKarty3} ${infOStatusie3} ${statusKarty3}
+                                </li>
 
-              
-          </div>
-        </div>
-      </nav>
-      </div>
-    </div>
-</body>
-</html>
+                            </ul>
+                                
+                                <p><a href="<c:url value="/historiaplatnosci"/>">Historia Płatności</a></p>
+                                </font>
+                        </div>
+                    </div>
+                </div>
+            </body>
+
+            </html>

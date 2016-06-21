@@ -13,12 +13,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-/**
- * 
- * Ta klasa realizuje w odpowiedzi na żądania HTTP (GET i POST) wysyła strony do odbiorcy
- * W metodach mogą być realizowane różne operacje, które są potrzebne żeby odbiorcy wysłać potrzebne dane.
- * Używając tych samych adnotacji można zrobić więcej klas-kontrolerów.
- */
 @Controller
 public class KontrolerRachunkow {
 
@@ -56,14 +50,20 @@ public class KontrolerRachunkow {
                 int rachunekCount = rachunek.size();
                 if(rachunekCount>0)
                 {
+                    modelAndView.addObject("infORachunku1", "Numer rachunku:");
+                    modelAndView.addObject("infOSaldzie1", "Saldo:");
                     modelAndView.addObject("nrRachunku1", rachunek.get(0).getNumerRachunku());
                     modelAndView.addObject("saldo1",rachunek.get(0).getSaldo());
                     if(rachunekCount>1)
-                    {
+                    {   
+                        modelAndView.addObject("infORachunku2", "Numer rachunku 2:");
+                        modelAndView.addObject("infOSaldzie2", "Saldo rachunku nr 2:");
                         modelAndView.addObject("nrRachunku2", rachunek.get(1).getNumerRachunku());
                         modelAndView.addObject("saldo2",rachunek.get(1).getSaldo());
                         if(rachunekCount>2)
                         {
+                            modelAndView.addObject("infORachunku3", "Numer rachunku 3:");
+                            modelAndView.addObject("infOSaldzie3", "Saldo rachunku nr 3:");
                             modelAndView.addObject("nrRachunku3", rachunek.get(2).getNumerRachunku());
                             modelAndView.addObject("saldo3",rachunek.get(2).getSaldo());
                         }

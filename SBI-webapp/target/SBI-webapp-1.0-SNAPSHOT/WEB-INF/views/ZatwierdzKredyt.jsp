@@ -1,24 +1,70 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<!DOCTYPE html>
+            <!DOCTYPE html>
+            <html lang="pl">
 
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Formularz zatwierdzania kredytu</title>
-    </head>
-    <body>
-        
-        <form:form method="POST" modelAttribute="formularzKr">   
-            <th>Podaj id kredytu który chcesz zatwierdzić/odrzucić</th>
-              <td><form:input type="number" path="id" /><form:errors path="id" /></td>
+            <head>
+                <title>Panel bankiera</title>
+                <meta charset="utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+                <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-        <input type="submit" name="action" value="Zatwierdz" />
-        <input type="submit" name="action" value="Odrzuc" />
-       </form:form>
+                <style>
+                    ul {
+                        list-style-type: none;
+                    }
+                    
+                </style>
+            </head>
 
-        
-    </body>
-</html>
+            <body>
+
+                <div class="container">
+
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar2">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <span class="navbar-brand">Panel bankiera</span>
+                            </div>
+                            <div class="collapse navbar-collapse " id="myNavbar2">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="<c:url value="/zalogowano" />">Strona Główna</a></li>
+                                    <li><a href="<c:url value="/zatwierdzkredyt"/>">Zatwierdz/odrzuć kredyt</a></li>
+                                    <li><a href="<c:url value="/przejrzyjkredyt"/>">Przejrzyj kredyt</a></li>
+                                </ul>
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        <a href="<c:url value="/logout" />"><span class="glyphicon glyphicon-log-out"></span>Wyloguj</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+
+                    <div class="content">
+                        <div class="container-fluid">
+                       <font size="4">
+                                    <form:form method="POST" modelAttribute="formularzKr">   
+                            <th>Podaj id kredytu który chcesz zatwierdzić/odrzucić</th>
+                              <td><form:input type="number" path="id" /><form:errors path="id" /></td>
+
+                        <input type="submit" name="action" value="Zatwierdz" />
+                        <input type="submit" name="action" value="Odrzuc" />
+                       </form:form>
+                                </font>
+                        </div>
+                    </div>
+                </div>
+            </body>
+
+            </html>
